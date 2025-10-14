@@ -14,13 +14,13 @@ public class TestConnection {
 
     @Test
     public void getIdTest() throws IOException, URISyntaxException {
-        String id = String.valueOf(SteamConnection.connectToSteam());
-        Assertions.assertEquals(id,"76561198799220336");
+        String id = SteamConnection.getAccountId();
+        Assertions.assertEquals("76561198799220336", id);
     }
 
     @Test
     public void testAccess(){
-        String xmlData = Formatter.readFileAsString("sample.xml");
-        Assertions.assertNotNull(xmlData);
+        String jsonData = Formatter.readFileAsString("sample.json");
+        Assertions.assertNotNull(jsonData);
     }
 }

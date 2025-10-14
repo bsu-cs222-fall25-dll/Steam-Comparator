@@ -9,16 +9,16 @@ import java.nio.charset.Charset;
 
 public class SteamConnection {
 
-    public static URLConnection connectToSteam() throws IOException, URISyntaxException {
-        String encodedUrlString = "https://steamcommunity.com/id/tigerlang/?xml=1" +
+    public static String getAccountId() throws IOException, URISyntaxException {
+        String encodedUrlString = "https://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=F2B3A13F8246165E1FD566131CB5A81F&vanityurl=tigerlang" +
                 URLEncoder.encode(String.valueOf(Charset.defaultCharset())) +
-                "&rvprop=profile" + URLEncoder.encode("|",Charset.defaultCharset()) + "user&rvlimit=15&redirects";
+                "&response=steamid";
         URI uri = new URI(encodedUrlString);
         URLConnection connection = uri.toURL().openConnection();
         connection.setRequestProperty("User-Agent",
                 "CS222FinalProject/0.1 (caleb.langley@bsu.edu)");
         connection.connect();
-        return connection;
+        return encodedUrlString;
     }
 
 }
