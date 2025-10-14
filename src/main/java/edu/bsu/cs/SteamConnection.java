@@ -1,24 +1,40 @@
 package edu.bsu.cs;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-import java.nio.charset.Charset;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class SteamConnection {
+/*
+getAccountId and parseAccountId were
+made using a guide, so we should probably
+find out how exactly they work and
+see if they need refactoring
+ */
+    public static String getAccountId() throws Exception {
+        URL url = new URL("https://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=F2B3A13F8246165E1FD566131CB5A81F&vanityurl=tigerlang");
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        conn.setRequestProperty("User-Agent", "CS222FinalProject/0.1 (caleb.langley@bsu.edu)");
 
-    public static String getAccountId() throws IOException, URISyntaxException {
-        String encodedUrlString = "https://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=F2B3A13F8246165E1FD566131CB5A81F&vanityurl=tigerlang" +
-                URLEncoder.encode(String.valueOf(Charset.defaultCharset())) +
-                "&response=steamid";
-        URI uri = new URI(encodedUrlString);
-        URLConnection connection = uri.toURL().openConnection();
-        connection.setRequestProperty("User-Agent",
-                "CS222FinalProject/0.1 (caleb.langley@bsu.edu)");
-        connection.connect();
-        return encodedUrlString;
+        BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        StringBuilder response = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            response.append(line);
+        }
+        reader.close();
+        return parseAccountId(response.toString());
     }
 
+    public static String parseAccountId(String json) {
+        String key = "\"steamid\":\"";
+        int start = json.indexOf(key);
+        if (start == -1) return null;
+        start += key.length();
+        int end = json.indexOf("\"", start);
+        if (end == -1) return null;
+        return json.substring(start, end);
+    }
 }
