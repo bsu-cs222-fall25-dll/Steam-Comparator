@@ -15,7 +15,7 @@ public class TestConnection {
     @Test
     public void getIdTest() throws IOException, URISyntaxException {
         String id = String.valueOf(SteamConnection.connectToSteam());
-        Assertions.assertEquals(id,"76561198799220336");
+        Assertions.assertEquals("76561198799220336", id);
     }
 
     @Test
