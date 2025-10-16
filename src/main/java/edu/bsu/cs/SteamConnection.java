@@ -13,6 +13,7 @@ find out how exactly they work and
 see if they need refactoring
  */
     public static String getAccountId() throws Exception {
+
         URL url = new URL("https://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=F2B3A13F8246165E1FD566131CB5A81F&vanityurl=tigerlang");
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
@@ -25,7 +26,7 @@ see if they need refactoring
             response.append(line);
         }
         reader.close();
-        return parseAccountId(response.toString());
+        return AccountParser.parseAccountId(response.toString());
     }
 
     public static String parseAccountId(String json) {
