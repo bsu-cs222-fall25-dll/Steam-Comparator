@@ -2,6 +2,7 @@ package edu.bsu.cs;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLConnection;
 import java.nio.charset.Charset;
 import java.util.Objects;
 
@@ -16,4 +17,7 @@ public class Formatter {
         }
     }
 
+    public static String readJsonAsString(URLConnection connection) throws IOException {
+        return new String(connection.getInputStream().readAllBytes(), Charset.defaultCharset());
+    }
 }

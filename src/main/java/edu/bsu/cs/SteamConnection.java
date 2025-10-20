@@ -22,19 +22,6 @@ public class SteamConnection {
         return AccountParser.parseAccountId(response.toString());
     }
 
-    public static void getUserData(String accountName) throws Exception {
-        String steamID = getAccountId(accountName);
-
-        URL url = new URL("");
-        String displayName = "";
-
-
-
-
-        User user = new User(steamID, displayName);
-
-    }
-
     public static URLConnection connectToUser(String accountID) throws IOException, URISyntaxException {
         String URLString = "https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=F2B3A13F8246165E1FD566131CB5A81F&steamids=" + accountID;
         URI uri = new URI(URLString);
