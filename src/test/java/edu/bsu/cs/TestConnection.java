@@ -8,7 +8,7 @@ public class TestConnection {
 
     @Test
     public void getIdTest() throws Exception {
-        String id = SteamConnection.getAccountId();
+        String id = SteamConnection.getAccountId("tigerlang");
         Assertions.assertEquals("76561198799220336", id);
     }
 

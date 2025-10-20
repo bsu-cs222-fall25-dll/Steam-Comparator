@@ -1,7 +1,7 @@
 package edu.bsu.cs;
 
 public class Game {
-    public int hours;
-    public int gameID;
-    public String achievemnts;
+    private int hours;
+    private int gameID;
+    private String achievements;
 }
