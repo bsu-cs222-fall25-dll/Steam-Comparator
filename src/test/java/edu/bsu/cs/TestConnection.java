@@ -33,10 +33,7 @@ public class TestConnection {
 
     @Test
     public void testUrlParse() throws MalformedURLException {
-        URL steamUrl = new URL("https://steamcommunity.com/id/tigerlang/");
-
-        String[] urlParts = steamUrl.getPath().split("/");
-        String vanityID = urlParts[urlParts.length - 1].isEmpty() ? urlParts[urlParts.length - 2] : urlParts[urlParts.length - 1];
+        String vanityID = AccountParser.parseAccountName("https://steamcommunity.com/id/tigerlang/");
 
         Assertions.assertEquals("tigerlang", vanityID);
 
