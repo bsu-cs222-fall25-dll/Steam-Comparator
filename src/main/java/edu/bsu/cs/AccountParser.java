@@ -19,9 +19,8 @@ public class AccountParser
         URL steamUrl = new URL(steamLink);
 
         String[] urlParts = steamUrl.getPath().split("/");
-        String vanityID = urlParts[urlParts.length - 1].isEmpty() ? urlParts[urlParts.length - 2] : urlParts[urlParts.length - 1];
 
-        return vanityID;
+        return urlParts[urlParts.length - 1].isEmpty() ? urlParts[urlParts.length - 2] : urlParts[urlParts.length - 1];
     }
 
 }
