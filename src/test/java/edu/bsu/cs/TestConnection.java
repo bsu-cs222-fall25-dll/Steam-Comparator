@@ -4,7 +4,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.net.URL;
 
 
 public class TestConnection {
@@ -29,4 +31,15 @@ public class TestConnection {
         Assertions.assertEquals(jsonData, userData);
     }
 
+    @Test
+    public void testUrlParse() throws MalformedURLException {
+        URL aURL = new URL("https://steamcommunity.com/id/SilvacTTV/");
+
+        String path = aURL.getPath();
+        String[] urlParts = path.split("/");
+        String vanityID = urlParts[urlParts.length - 1].isEmpty() ? urlParts[urlParts.length - 2] : urlParts[urlParts.length - 1];
+
+        Assertions.assertEquals("SilvacTTV", vanityID);
+
+    }
 }
