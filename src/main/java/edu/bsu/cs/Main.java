@@ -7,6 +7,6 @@ public class Main {
         String userData = UserFetcher.getUserDataAsString(accountName);
         User user = UserParser.parseUserData(userData);
 
-        System.out.println(user);
+        System.out.println(User.printUser());
     }
 }
