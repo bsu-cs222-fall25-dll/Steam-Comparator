@@ -8,8 +8,8 @@ public class User {
     private ArrayList<Game> games = new ArrayList<>();
 
     public User(String steamID, String displayName){
-        this.steamID = steamID;
-        this.displayName = displayName;
+        User.steamID = steamID;
+        User.displayName = displayName;
     }
 
     public static String getSteamID() {

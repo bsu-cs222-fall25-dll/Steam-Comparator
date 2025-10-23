@@ -4,8 +4,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.nio.charset.Charset;
+import java.util.Objects;
 
 public class TestFormat {
 
@@ -15,7 +18,7 @@ public class TestFormat {
 
     @Test
     public void testAccess(){
-        String jsonData = Formatter.readFileAsString("sample.json");
+        String jsonData = readFileAsString("sample.json");
         Assertions.assertNotNull(jsonData);
     }
 
@@ -28,15 +31,24 @@ public class TestFormat {
 
     @Test
     public void testSteamIDFetched() {
-        String steamID = UserParser.parseSteamID(Formatter.readFileAsString("sampleUserData.json"));
+        String steamID = UserParser.parseSteamID(readFileAsString("sampleUserData.json"));
 
         Assertions.assertEquals("76561198799220336", steamID);
     }
 
     @Test
     public void testDisplayNameFetched() {
-        String displayName = UserParser.parseDisplayName(Formatter.readFileAsString("sampleUserData.json"));
+        String displayName = UserParser.parseDisplayName(readFileAsString("sampleUserData.json"));
         System.out.println(displayName);
         Assertions.assertEquals("Tigerlang", displayName);
+    }
+
+    public static String readFileAsString(String inputFile){
+        try (InputStream file = Thread.currentThread().getContextClassLoader()
+                .getResourceAsStream(inputFile)) {
+            return new String(Objects.requireNonNull(file).readAllBytes(), Charset.defaultCharset());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

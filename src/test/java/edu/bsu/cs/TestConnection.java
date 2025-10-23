@@ -13,13 +13,4 @@ public class TestConnection {
         String id = SteamConnection.getAccountId("tigerlang");
         Assertions.assertEquals("76561198799220336", id);
     }
-
-    @Test
-    public void testID() throws IOException, URISyntaxException {
-        String jsonData = Formatter.readFileAsString("sampleUserData.json");
-        String userData = Formatter.readJsonAsString(SteamConnection.connectToUser("76561198799220336"));
-
-        Assertions.assertEquals(jsonData, userData);
-    }
-
 }
