@@ -8,6 +8,11 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 
 public class TestFormat {
+
+    static {
+        System.setProperty("com.jayway.jsonpath.cache.disable", "true");
+    }
+
     @Test
     public void testAccess(){
         String jsonData = Formatter.readFileAsString("sample.json");
@@ -31,7 +36,7 @@ public class TestFormat {
     @Test
     public void testDisplayNameFetched() {
         String displayName = UserParser.parseDisplayName(Formatter.readFileAsString("sampleUserData.json"));
-
+        System.out.println(displayName);
         Assertions.assertEquals("Tigerlang", displayName);
     }
 }

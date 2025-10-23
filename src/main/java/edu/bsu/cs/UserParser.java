@@ -1,21 +1,28 @@
 package edu.bsu.cs;
 
 import com.jayway.jsonpath.JsonPath;
-import net.minidev.json.JSONArray;
 
 public class UserParser {
     public static User parseUserData(String jsonData) {
-        String steamID = JsonPath.read(jsonData, "$.response.players.*.steamid");
-        String displayName = JsonPath.read(jsonData, "$.response.players.*.personaname");
+        String steamID = parseSteamID(jsonData);
+        String displayName = parseDisplayName(jsonData);
 
         return new User(steamID, displayName);
     }
 
     public static String parseSteamID(String jsonData) {
-        return JsonPath.read(jsonData, "$.response.players.*.steamid");
+        try {
+            return JsonPath.read(jsonData, "$.response.players[0].steamid");
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to parse SteamID" + e.getMessage(), e);
+        }
     }
 
     public static String parseDisplayName(String jsonData) {
-        return JsonPath.read(jsonData, "$.response.players.*.personaname");
+        try {
+            return JsonPath.read(jsonData, "$.response.players[0].personaname");
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to parse display name" + e.getMessage(), e);
+        }
     }
 }

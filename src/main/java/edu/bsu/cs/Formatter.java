@@ -18,6 +18,8 @@ public class Formatter {
     }
 
     public static String readJsonAsString(URLConnection connection) throws IOException {
-        return new String(connection.getInputStream().readAllBytes(), Charset.defaultCharset());
+        try (InputStream input = connection.getInputStream()) {
+            return new String(input.readAllBytes(), Charset.defaultCharset());
+        }
     }
 }
