@@ -1,15 +1,14 @@
 package edu.bsu.cs;
 
-import java.util.ArrayList;
-
 public class User {
     private static String steamID;
     private static String displayName;
-    private ArrayList<Game> games = new ArrayList<>();
+    private static Game games;
 
-    public User(String steamID, String displayName){
+    public User(String steamID, String displayName, Game games){
         User.steamID = steamID;
         User.displayName = displayName;
+        User.games = games;
     }
 
     public static String getSteamID() {
@@ -20,7 +19,12 @@ public class User {
         return displayName;
     }
 
+    public static Game getGames() {
+        return games;
+    }
+
     public static String printUser() {
-        return ("User: " + getDisplayName() + ", User ID: " + getSteamID());
+        return ("User: " + getDisplayName() + ", User ID: " + getSteamID() + "\n" +
+                Game.printGame());
     }
 }

@@ -3,11 +3,12 @@ package edu.bsu.cs;
 import com.jayway.jsonpath.JsonPath;
 
 public class UserParser {
-    public static User parseUserData(String jsonUserData) {
+    public static User parseUserData(String jsonUserData, String jsonGameData) {
         String steamID = parseSteamID(jsonUserData);
         String displayName = parseDisplayName(jsonUserData);
+        Game userMostPlayedGame = GameParser.parseMostPlayedGame(jsonGameData);
 
-        return new User(steamID, displayName);
+        return new User(steamID, displayName, userMostPlayedGame);
     }
 
     public static String parseSteamID(String jsonUserData) {
