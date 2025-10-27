@@ -30,4 +30,13 @@ public class SteamConnection {
         connection.connect();
         return connection;
     }
+
+    public static URLConnection connectToGames(String accountID) throws URISyntaxException, IOException {
+        String URLString = "https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=F2B3A13F8246165E1FD566131CB5A81F&steamid="+accountID+"&include_appinfo=1&include_played_free_games=1&format=json";
+        URI uri = new URI(URLString);
+        URLConnection connection = uri.toURL().openConnection();
+
+        connection.connect();
+        return connection;
+    }
 }

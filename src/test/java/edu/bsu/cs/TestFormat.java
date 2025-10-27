@@ -42,6 +42,13 @@ public class TestFormat {
         Assertions.assertEquals("Tigerlang", displayName);
     }
 
+    @Test
+    public void testGameParser(){
+        Game testGame = GameParser.parseMostPlayedGame(readFileAsString("sampleGamesOwned.json"));
+        System.out.println(Game.printGame());
+        Assertions.assertEquals("Game Name: Tom Clancy's Rainbow Six® Siege X, App ID: 359550, Hours played: 264", Game.printGame());
+    }
+
     public static String readFileAsString(String inputFile){
         try (InputStream file = Thread.currentThread().getContextClassLoader()
                 .getResourceAsStream(inputFile)) {
