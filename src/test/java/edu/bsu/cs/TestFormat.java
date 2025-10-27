@@ -46,8 +46,8 @@ public class TestFormat {
     @Test
     public void testGameParser(){
         Game testGame = GameParser.parseMostPlayedGame(readFileAsString("sampleGamesOwned.json"));
-        System.out.println(Game.printGame());
-        Assertions.assertEquals("Game Name: Tom Clancy's Rainbow Six® Siege X, App ID: 359550, Hours played: 264", Game.printGame());
+        System.out.println(testGame.printGame());
+        Assertions.assertEquals("Game Name: Tom Clancy's Rainbow Six® Siege X, App ID: 359550, Hours played: 264", testGame.printGame());
     }
 
     public static String readFileAsString(String inputFile){

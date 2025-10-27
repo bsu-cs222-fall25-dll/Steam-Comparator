@@ -1,29 +1,29 @@
 package edu.bsu.cs;
 
 public class Game {
-    private static int minutes;
-    private static int appID;
-    private static String gameName;
+    private int minutes;
+    private int appID;
+    private  String gameName;
 
     public Game(int minutes, int appID, String gameName) {
-        Game.minutes = minutes;
-        Game.appID = appID;
-        Game.gameName = gameName;
+        this.minutes = minutes;
+        this.appID = appID;
+        this.gameName = gameName;
     }
 
-    public static int getMinutes() {
+    public int getMinutes() {
         return minutes;
     }
 
-    public static int getAppID() {
+    public int getAppID() {
         return appID;
     }
 
-    public static String getGameName() {
+    public String getGameName() {
         return gameName;
     }
 
-    public static String printGame(){
+    public String printGame(){
         return ("Game Name: " + getGameName() + ", App ID: " + getAppID() + ", Hours played: " + getMinutes()/60);
     }
 }

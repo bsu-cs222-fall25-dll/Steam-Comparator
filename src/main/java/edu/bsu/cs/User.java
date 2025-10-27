@@ -1,30 +1,30 @@
 package edu.bsu.cs;
 
 public class User {
-    private static String steamID;
-    private static String displayName;
-    private static Game games;
+    private String steamID;
+    private String displayName;
+    private Game games;
 
     public User(String steamID, String displayName, Game games){
-        User.steamID = steamID;
-        User.displayName = displayName;
-        User.games = games;
+        this.steamID = steamID;
+        this.displayName = displayName;
+        this.games = games;
     }
 
-    public static String getSteamID() {
+    public String getSteamID() {
         return steamID;
     }
 
-    public static String getDisplayName() {
+    public String getDisplayName() {
         return displayName;
     }
 
-    public static Game getGames() {
+    public Game getGames() {
         return games;
     }
 
-    public static String printUser() {
+    public String printUser() {
         return ("User: " + getDisplayName() + ", User ID: " + getSteamID() + "\n" +
-                Game.printGame());
+                games.printGame());
     }
 }
