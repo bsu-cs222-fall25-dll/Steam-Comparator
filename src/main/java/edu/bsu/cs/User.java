@@ -19,10 +19,6 @@ public class User {
         return displayName;
     }
 
-    public Game getGames() {
-        return games;
-    }
-
     public String printUser() {
         return ("User: " + getDisplayName() + ", User ID: " + getSteamID() + "\n" +
                 games.printGame());
