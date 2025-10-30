@@ -7,6 +7,9 @@ import java.net.*;
 
 public class SteamConnection {
     public static String getAccountId(String accountName) throws Exception {
+        if (accountName.matches("\\d+")) {
+            return accountName;
+        }
         URL url = new URL("https://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=F2B3A13F8246165E1FD566131CB5A81F&vanityurl="+accountName);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
