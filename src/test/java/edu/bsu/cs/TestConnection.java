@@ -19,4 +19,10 @@ public class TestConnection {
         String gamesConnection = Formatter.readJsonAsString(SteamConnection.connectToGames("76561198799220336"));
         Assertions.assertNotNull(gamesConnection);
     }
+
+    @Test
+    public void testUserConnection() throws IOException, URISyntaxException {
+        String userConnection = Formatter.readJsonAsString(SteamConnection.connectToUser("76561198799220336"));
+        Assertions.assertNotNull(userConnection);
+    }
 }

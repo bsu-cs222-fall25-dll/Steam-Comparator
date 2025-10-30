@@ -15,11 +15,18 @@ public class CommandLine {
             }
 
             String accountName = AccountParser.parseAccountName(steamLink);
-            String userData = UserFetcher.getUserDataAsString(accountName);
-            String gameData = UserFetcher.getGameDataAsString(accountName);
-            User user = UserParser.parseUserData(userData, gameData);
+            if (accountName.equals("0")){
+                System.out.println("Invalid link entered");
 
-            System.out.println("\n" + user.printUser() + "\n");
+            }
+            else {
+
+                String userData = UserFetcher.getUserDataAsString(accountName);
+                String gameData = UserFetcher.getGameDataAsString(accountName);
+                User user = UserParser.parseUserData(userData, gameData);
+
+                System.out.println("\n" + user.printUser() + "\n");
+            }
         }
     }
 }
