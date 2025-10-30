@@ -16,10 +16,14 @@ public class AccountParser
     }
 
     public static String parseAccountName(String steamLink) throws MalformedURLException {
-        URL steamUrl = new URL(steamLink);
+        URL steamUrl;
+        try {
+           steamUrl = new URL(steamLink);
+       } catch (MalformedURLException e) {
+            return "0";
 
+       }
         String[] urlParts = steamUrl.getPath().split("/");
-
         return urlParts[urlParts.length - 1].isEmpty() ? urlParts[urlParts.length - 2] : urlParts[urlParts.length - 1];
     }
 
