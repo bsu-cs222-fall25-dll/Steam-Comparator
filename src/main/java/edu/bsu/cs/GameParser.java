@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class GameParser {
-    public static Game parseMostPlayedGame(String jsonGameData){
+    public static Game parseMostPlayedGame(String jsonGameData) throws SteamApiException {
         try{
             ReadContext context = JsonPath.parse(jsonGameData);
 
@@ -35,8 +35,9 @@ public class GameParser {
             } else {
                 throw new RuntimeException("Couldn't parse for most played game.");
             }
-        } catch (RuntimeException e) {
-            throw new RuntimeException("Couldn't parse most played game: " + e.getMessage(), e);
+        } catch (Exception e) {
+            throw new SteamApiException("Error parsing game data.", e);
         }
+
     }
 }

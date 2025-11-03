@@ -3,12 +3,16 @@ package edu.bsu.cs;
 import com.jayway.jsonpath.JsonPath;
 
 public class UserParser {
-    public static User parseUserData(String jsonUserData, String jsonGameData) {
-        String steamID = parseSteamID(jsonUserData);
-        String displayName = parseDisplayName(jsonUserData);
-        Game userMostPlayedGame = GameParser.parseMostPlayedGame(jsonGameData);
+    public static User parseUserData(String jsonUserData, String jsonGameData) throws SteamApiException {
+        try {
+            String steamID = parseSteamID(jsonUserData);
+            String displayName = parseDisplayName(jsonUserData);
+            Game userMostPlayedGame = GameParser.parseMostPlayedGame(jsonGameData);
 
-        return new User(steamID, displayName, userMostPlayedGame);
+            return new User(steamID, displayName, userMostPlayedGame);
+        } catch (Exception e) {
+            throw new SteamApiException("Failed to parse user data.", e);
+        }
     }
 
     public static String parseSteamID(String jsonUserData) {
