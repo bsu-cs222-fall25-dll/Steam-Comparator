@@ -14,4 +14,12 @@ public class UserFetcher {
         URLConnection connection = SteamConnection.connectToGames(SteamConnection.getAccountId(accountName));
         return Formatter.readJsonAsString(connection);
     }
+
+    public static String readJsonAsString(URLConnection connection) throws IOException, SteamApiException {
+        try (InputStream input = connection.getInputStream()) {
+            return new String(input.readAllBytes(), Charset.defaultCharset());
+        }  catch (IOException e) {
+            throw new SteamApiException("Error reading JSON response.", e);
+        }
+    }
 }
