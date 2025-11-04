@@ -22,7 +22,7 @@ public class TestFormat {
     }
 
     @Test
-    public void testUrlParse() throws MalformedURLException {
+    public void testUrlParse() throws MalformedURLException, SteamApiException {
         String vanityID = AccountParser.parseAccountName("https://steamcommunity.com/id/tigerlang/");
 
         Assertions.assertEquals("tigerlang", vanityID);
@@ -43,13 +43,13 @@ public class TestFormat {
     }
 
     @Test
-    public void testGameParser(){
+    public void testGameParser() throws SteamApiException {
         Game testGame = GameParser.parseMostPlayedGame(readFileAsString("sampleGamesOwned.json"));
         Assertions.assertEquals("Game Name: Tom Clancy's Rainbow Six® Siege X, App ID: 359550, Hours played: 264", testGame.printGame());
     }
 
     @Test
-    public void testUserParser(){
+    public void testUserParser() throws SteamApiException {
         User testUser = UserParser.parseUserData(readFileAsString("sampleUserData.json"), readFileAsString("sampleGamesOwned.json"));
         Assertions.assertEquals("User: Tigerlang, User ID: 76561198799220336\n" +
                 "Game Name: Tom Clancy's Rainbow Six® Siege X, App ID: 359550, Hours played: 264",

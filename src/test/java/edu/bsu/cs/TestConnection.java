@@ -17,13 +17,13 @@ public class TestConnection {
     }
 
     @Test
-    public void testGamesConnection() throws URISyntaxException, IOException {
+    public void testGamesConnection() throws URISyntaxException, IOException, SteamApiException {
         String gamesConnection = readJsonAsString(SteamConnection.connectToGames("76561198799220336"));
         Assertions.assertNotNull(gamesConnection);
     }
 
     @Test
-    public void testUserConnection() throws IOException, URISyntaxException {
+    public void testUserConnection() throws IOException, URISyntaxException, SteamApiException {
         String userConnection = readJsonAsString(SteamConnection.connectToUser("76561198799220336"));
         Assertions.assertNotNull(userConnection);
     }
