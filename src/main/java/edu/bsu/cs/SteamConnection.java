@@ -6,12 +6,15 @@ import java.io.InputStreamReader;
 import java.net.*;
 
 public class SteamConnection {
+    private static final String KEY = ConfigLoader.get("steam.api.key");
+
+
     public static String getAccountId(String accountName) throws Exception {
         if (accountName.matches("\\d+")) {
             return accountName;
         }
 
-        URL url = new URL("https://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=F2B3A13F8246165E1FD566131CB5A81F&vanityurl=" + accountName);
+        URL url = new URL("https://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=" + KEY + "&vanityurl=" + accountName);
 
        try {
            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -35,7 +38,7 @@ public class SteamConnection {
     }
 
     public static URLConnection connectToUser(String accountID) throws IOException, URISyntaxException {
-        String URLString = "https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=F2B3A13F8246165E1FD566131CB5A81F&steamids=" + accountID;
+        String URLString = "https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" + KEY + "&steamids=" + accountID;
         URI uri = new URI(URLString);
         URLConnection connection;
 
@@ -50,7 +53,7 @@ public class SteamConnection {
     }
 
     public static URLConnection connectToGames(String accountID) throws URISyntaxException, IOException {
-        String URLString = "https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=F2B3A13F8246165E1FD566131CB5A81F&steamid="+accountID+"&include_appinfo=1&include_played_free_games=1&format=json";
+        String URLString = "https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" + KEY + "&steamid="+accountID+"&include_appinfo=1&include_played_free_games=1&format=json";
         URI uri = new URI(URLString);
         URLConnection connection = uri.toURL().openConnection();
 
