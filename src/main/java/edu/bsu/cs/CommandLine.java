@@ -22,7 +22,7 @@ public class CommandLine {
                 User user = UserParser.parseUserData(userData, gameData);
                 System.out.println("\n" + user.printUser() + "\n");
             } catch (SteamApiException e) {
-                System.out.println("Error: " + e.getMessage());
+                System.out.println("\nError: " + e.getMessage());
             }
         }
 

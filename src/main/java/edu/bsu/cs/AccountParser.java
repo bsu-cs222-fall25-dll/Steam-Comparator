@@ -20,17 +20,17 @@ public class AccountParser
             URL steamUrl = new URL(steamLink);
 
             if (!steamUrl.getHost().contains("steamcommunity.com")) {
-                throw new SteamApiException("Account not found.\n");
+                throw new SteamApiException("Please enter a Steam link.\n");
             }
 
             String[] urlParts = steamUrl.getPath().split("/");
             if (urlParts.length < 2) {
-                throw new SteamApiException("Account not found\n");
+                throw new SteamApiException("Please enter an account link.\n");
             }
 
             String name = urlParts[urlParts.length - 1].isEmpty() ? urlParts[urlParts.length - 2] : urlParts[urlParts.length - 1];
             if (name.isEmpty()) {
-                throw new SteamApiException("Account not found.\n");
+                throw new SteamApiException("Invalid link\n");
             }
 
             return name;
