@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+import static edu.bsu.cs.UserFetcher.readJsonAsString;
+
 public class TestConnection {
 
     @Test
@@ -15,14 +17,14 @@ public class TestConnection {
     }
 
     @Test
-    public void testGamesConnection() throws URISyntaxException, IOException {
-        String gamesConnection = Formatter.readJsonAsString(SteamConnection.connectToGames("76561198799220336"));
+    public void testGamesConnection() throws URISyntaxException, IOException, SteamApiException {
+        String gamesConnection = readJsonAsString(SteamConnection.connectToGames("76561198799220336"));
         Assertions.assertNotNull(gamesConnection);
     }
 
     @Test
-    public void testUserConnection() throws IOException, URISyntaxException {
-        String userConnection = Formatter.readJsonAsString(SteamConnection.connectToUser("76561198799220336"));
+    public void testUserConnection() throws IOException, URISyntaxException, SteamApiException {
+        String userConnection = readJsonAsString(SteamConnection.connectToUser("76561198799220336"));
         Assertions.assertNotNull(userConnection);
     }
 }

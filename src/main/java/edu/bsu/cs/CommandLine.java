@@ -1,5 +1,6 @@
 package edu.bsu.cs;
 
+import java.net.URL;
 import java.util.Scanner;
 
 public class CommandLine {
@@ -10,23 +11,20 @@ public class CommandLine {
             System.out.print("Enter Steam profile link or (q)uit: ");
             String steamLink = userInput.nextLine();
 
-            if (steamLink.toLowerCase().equals("q")) {
-                return;
+            if (steamLink.equalsIgnoreCase("q")) {
+                break;
             }
 
-            String accountName = AccountParser.parseAccountName(steamLink);
-            if (accountName.equals("0")){
-                System.out.println("Invalid link entered");
-
-            }
-            else {
-
+            try {
+                String accountName = AccountParser.parseAccountName(steamLink);
                 String userData = UserFetcher.getUserDataAsString(accountName);
                 String gameData = UserFetcher.getGameDataAsString(accountName);
                 User user = UserParser.parseUserData(userData, gameData);
-
                 System.out.println("\n" + user.printUser() + "\n");
+            } catch (SteamApiException e) {
+                System.out.println("\nError: " + e.getMessage());
             }
         }
+
     }
 }
