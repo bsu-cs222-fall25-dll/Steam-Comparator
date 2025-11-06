@@ -14,7 +14,6 @@ public class UserFetcher {
         } catch (IOException | URISyntaxException e) {
             throw new SteamApiException("Failed to fetch user data.", e);
         }
-
     }
 
     public static String getGameDataAsString(String accountName) throws Exception {

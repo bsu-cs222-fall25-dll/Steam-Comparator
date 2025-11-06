@@ -1,7 +1,6 @@
 package edu.bsu.cs;
-
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 public class AccountParser
 {
@@ -17,7 +16,7 @@ public class AccountParser
 
     public static String parseAccountName(String steamLink) throws SteamApiException {
         try {
-            URL steamUrl = new URL(steamLink);
+            URI steamUrl = new URI(steamLink);
 
             if (!steamUrl.getHost().contains("steamcommunity.com")) {
                 throw new SteamApiException("Please enter a Steam link.\n");
@@ -34,9 +33,8 @@ public class AccountParser
             }
 
             return name;
-        } catch (MalformedURLException e) {
-            throw new SteamApiException("Invalid URL format.\n", e);
+        } catch (URISyntaxException e) {
+            throw new SteamApiException("Invalid URL format. \n", e);
         }
     }
-
 }

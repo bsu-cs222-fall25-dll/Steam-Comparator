@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
 
-@SuppressWarnings("deprecation")
 public class SteamConnection {
     private static final String KEY = ConfigLoader.get("steam.api.key");
 
@@ -15,10 +14,10 @@ public class SteamConnection {
             return accountName;
         }
 
-        URL url = new URL("https://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=" + KEY + "&vanityurl=" + accountName);
+        URI uri = new URI("https://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=" + KEY + "&vanityurl=" + accountName);
 
        try {
-           HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+           HttpURLConnection conn = (HttpURLConnection) uri.toURL().openConnection();
            conn.setRequestMethod("GET");
            conn.setRequestProperty("User-Agent", "CS222FinalProject/0.1 (caleb.langley@bsu.edu)");
 
