@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
 
+@SuppressWarnings("deprecation")
 public class SteamConnection {
     private static final String KEY = ConfigLoader.get("steam.api.key");
 

@@ -35,7 +35,7 @@ public class AccountParser
 
             return name;
         } catch (MalformedURLException e) {
-            throw new SteamApiException("Invalid URL format.", e);
+            throw new SteamApiException("Invalid URL format.\n", e);
         }
     }
 

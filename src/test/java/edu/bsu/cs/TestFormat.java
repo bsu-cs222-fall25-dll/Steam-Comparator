@@ -56,6 +56,13 @@ public class TestFormat {
                 testUser.printUser());
     }
 
+    @Test
+    public void testIfAccountNameIsID() throws Exception {
+        String accountName = "239583265620358632053682";
+        String returned = SteamConnection.getAccountId(accountName);
+        Assertions.assertEquals("239583265620358632053682", returned);
+    }
+
     public static String readFileAsString(String inputFile){
         try (InputStream file = Thread.currentThread().getContextClassLoader()
                 .getResourceAsStream(inputFile)) {
