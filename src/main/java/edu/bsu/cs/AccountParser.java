@@ -21,9 +21,6 @@ public class AccountParser
             checkIfSteamLink(steamUrl);
 
             String[] urlParts = steamUrl.getPath().split("/");
-            if (urlParts.length < 2) {
-                throw new SteamApiException("Please enter an account link.\n");
-            }
 
             String name = urlParts[urlParts.length - 1].isEmpty() ? urlParts[urlParts.length - 2] : urlParts[urlParts.length - 1];
             if (name.isEmpty()) {
