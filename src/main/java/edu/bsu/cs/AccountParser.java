@@ -18,9 +18,7 @@ public class AccountParser
         try {
             URI steamUrl = new URI(steamLink);
 
-            if (!steamUrl.getHost().contains("steamcommunity.com")) {
-                throw new SteamApiException("Please enter a Steam link.\n");
-            }
+            checkIfSteamLink(steamUrl);
 
             String[] urlParts = steamUrl.getPath().split("/");
             if (urlParts.length < 2) {
