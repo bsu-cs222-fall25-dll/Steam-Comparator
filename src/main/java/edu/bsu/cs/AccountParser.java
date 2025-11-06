@@ -37,4 +37,15 @@ public class AccountParser
             throw new SteamApiException("Invalid URL format. \n", e);
         }
     }
+
+    public static void checkIfSteamLink(URI steamUrl) throws SteamApiException {
+        if (!steamUrl.getHost().contains("steamcommunity.com")) {
+            throw new SteamApiException("Please enter a Steam link.\n");
+        }
+
+        String[] urlParts = steamUrl.getPath().split("/");
+        if (urlParts.length < 2) {
+            throw new SteamApiException("Please enter an account link.\n");
+        }
+    }
 }
