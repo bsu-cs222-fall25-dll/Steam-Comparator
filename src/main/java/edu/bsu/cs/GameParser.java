@@ -3,6 +3,7 @@ package edu.bsu.cs;
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.ReadContext;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +38,13 @@ public class GameParser {
             }
         } catch (Exception e) {
             throw new SteamApiException("Error parsing game data.", e);
+        }
+
+    }
+
+    public static ArrayList<Game> parseRecentGames(String jsonRecentGameData) throws SteamApiException {
+        try{
+
         }
 
     }

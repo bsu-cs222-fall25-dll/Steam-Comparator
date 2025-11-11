@@ -60,4 +60,13 @@ public class SteamConnection {
         connection.connect();
         return connection;
     }
+
+    public static URLConnection connectToRecentGames(String accountID) throws URISyntaxException, IOException {
+        String URLString = "https://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=" + KEY + "&steamid=" + accountID + "&count=5&format=json";
+        URI uri = new URI(URLString);
+        URLConnection connection = uri.toURL().openConnection();
+
+        connection.connect();
+        return connection;
+    }
 }
