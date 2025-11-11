@@ -65,7 +65,7 @@ public class GUI extends Application {
                 displayUser(inputField1, outputField1);
                 displayUser(inputField2, outputField2);
             } catch (Exception ex) {
-                displayError("Error processing input: " + ex.getMessage());
+                displayError(ex.getMessage());
             }
         });
 
@@ -89,7 +89,7 @@ public class GUI extends Application {
         outputField.setText(user.printUser());
 
         if (outputField.getText().trim().isEmpty()) {
-            displayError("No article found");
+            displayError("User not found");
         }
 
     }
