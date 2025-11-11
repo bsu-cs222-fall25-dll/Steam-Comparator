@@ -8,11 +8,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-
 public class GUI extends Application {
-    static void main(String[] args) {
+    public static void main(String[] args) {
         launch(args);
     }
 
