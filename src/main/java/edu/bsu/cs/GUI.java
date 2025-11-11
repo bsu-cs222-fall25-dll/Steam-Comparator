@@ -84,8 +84,26 @@ public class GUI extends Application {
         return root;
     }
 
-    private void displayUser() throws Exception {
-        String steamLink =  inputField.getText();
+    private HBox getHBox(VBox leftColumn, VBox rightColumn) {
+        Button enterAllButton = new Button("Enter All");
+        enterAllButton.setDefaultButton(true);
+        enterAllButton.setOnAction(e -> {
+            try {
+                displayUser(inputField1, outputField1);
+                displayUser(inputField2, outputField2);
+            } catch (Exception ex) {
+                displayError("Error processing input: " + ex.getMessage());
+            }
+        });
+
+        VBox buttonBox = new VBox(enterAllButton);
+        HBox root = new HBox(10, leftColumn, rightColumn, buttonBox);
+        root.setPrefSize(900, 400);
+        return root;
+    }
+
+    private void displayUser(TextField inputField, TextArea outputField) throws Exception {
+        String steamLink =  inputField.getText().trim();
         if (steamLink.isEmpty()){
             displayError("Nothing entered");
         }
