@@ -10,9 +10,11 @@ import javafx.application.Platform;
 import java.util.ArrayList;
 import java.util.List;
 
-import static javafx.application.Application.launch;
+public class GUI extends Application{
 
-public class GUI {
+    public static void main(String[] args) {
+        launch();
+    }
 
     private TextField accountField;
     private TextArea outputArea;
@@ -105,9 +107,6 @@ public class GUI {
         outputArea.setText(builder.toString());
     }
 
-    public static void main(String[] args) {
-        launch();
-    }
 }
 
 
