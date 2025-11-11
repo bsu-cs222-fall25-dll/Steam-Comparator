@@ -17,7 +17,6 @@ public class AccountParser
     public static String parseAccountName(String steamLink) throws SteamApiException {
         try {
             URI steamUrl = new URI(steamLink);
-
             checkIfSteamLink(steamUrl);
 
             String[] urlParts = steamUrl.getPath().split("/");
@@ -34,7 +33,8 @@ public class AccountParser
     }
 
     public static void checkIfSteamLink(URI steamUrl) throws SteamApiException {
-        if (!steamUrl.getHost().contains("steamcommunity.com")) {
+        String host = steamUrl.getHost();
+        if (host == null || !host.contains("steamcommunity.com")) {
             throw new SteamApiException("Please enter a Steam link.\n");
         }
 
