@@ -87,7 +87,7 @@ public class GUI extends Application {
 
         String accountName = AccountParser.parseAccountName(steamLink);
         String userData = UserFetcher.getUserDataAsString(accountName);
-        String gameData = UserFetcher.getGameDataAsString(accountName);
+        String gameData = UserFetcher.getOwnedGamesAsString(accountName);
         String recentData = UserFetcher.getRecentlyPlayedDataAsString(accountName);
         User user = UserParser.parseUserData(userData, gameData, recentData);
         outputField.setText(user.printUser());

@@ -2,41 +2,44 @@ package edu.bsu.cs;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URISyntaxException;
 import java.net.URLConnection;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 public class UserFetcher {
-    public static String getUserDataAsString(String accountName) throws Exception {
+    public static String getUserDataAsString(String accountName) throws SteamApiException {
         try {
-            URLConnection connection = SteamConnection.connectToUser(SteamConnection.getAccountId(accountName));
+            String accountID = SteamConnection.getAccountId(accountName);
+            URLConnection connection = SteamConnection.connectToUser(accountID);
             return readJsonAsString(connection);
-        } catch (IOException | URISyntaxException e) {
+        } catch (Exception e) {
             throw new SteamApiException("Failed to fetch user data.", e);
         }
     }
 
-    public static String getGameDataAsString(String accountName) throws Exception {
+    public static String getOwnedGamesAsString(String accountName) throws SteamApiException {
         try {
-            URLConnection connection = SteamConnection.connectToGames(SteamConnection.getAccountId(accountName));
+            String accountID = SteamConnection.getAccountId(accountName);
+            URLConnection connection = SteamConnection.connectToGames(accountID);
             return readJsonAsString(connection);
-        } catch (IOException | URISyntaxException e) {
+        } catch (Exception e) {
             throw new SteamApiException("Failed to fetch game data.", e);
         }
     }
-    public static String getRecentlyPlayedDataAsString(String accountName) throws Exception {
+
+    public static String getRecentlyPlayedDataAsString(String accountName) throws SteamApiException {
         try {
-            URLConnection connection = SteamConnection.connectToRecentlyPlayed(SteamConnection.getAccountId(accountName));
+            String accountID = SteamConnection.getAccountId(accountName);
+            URLConnection connection = SteamConnection.connectToRecentlyPlayed(accountID);
             return readJsonAsString(connection);
-        } catch (IOException | URISyntaxException e) {
+        } catch (Exception e) {
             throw new SteamApiException("Failed to fetch recently played games data.", e);
         }
     }
 
-    public static String readJsonAsString(URLConnection connection) throws IOException, SteamApiException {
+    public static String readJsonAsString(URLConnection connection) throws SteamApiException {
         try (InputStream input = connection.getInputStream()) {
-            return new String(input.readAllBytes(), Charset.defaultCharset());
-        }  catch (IOException e) {
+            return new String(input.readAllBytes(), StandardCharsets.UTF_8);
+        } catch (IOException e) {
             throw new SteamApiException("Error reading JSON response.", e);
         }
     }
