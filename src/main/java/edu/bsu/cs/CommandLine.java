@@ -3,7 +3,7 @@ package edu.bsu.cs;
 import java.util.Scanner;
 
 public class CommandLine {
-    public static void run() throws Exception {
+    public static void run() {
         Scanner userInput = new Scanner(System.in);
 
         while (true) {
