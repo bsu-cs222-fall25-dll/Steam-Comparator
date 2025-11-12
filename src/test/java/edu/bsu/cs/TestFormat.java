@@ -45,14 +45,24 @@ public class TestFormat {
     @Test
     public void testGameParser() throws SteamApiException {
         Game testGame = GameParser.parseMostPlayedGame(readFileAsString("sampleGamesOwned.json"));
-        Assertions.assertEquals("Game Name: Tom Clancy's Rainbow Six® Siege X, App ID: 359550, Hours played: 264", testGame.printGame());
+        Assertions.assertEquals("Game Name: Tom Clancy's Rainbow Six® Siege X\nHours played: 264.75", testGame.printGame());
     }
 
     @Test
     public void testUserParser() throws SteamApiException {
         User testUser = UserParser.parseUserData(readFileAsString("sampleUserData.json"), readFileAsString("sampleGamesOwned.json"));
-        Assertions.assertEquals("User: Tigerlang, User ID: 76561198799220336\n" +
-                "Game Name: Tom Clancy's Rainbow Six® Siege X, App ID: 359550, Hours played: 264",
+        Assertions.assertEquals("User: Tigerlang\n" +
+                        "User ID: 76561198799220336\n" +
+                        "Most Played Game:\n" +
+                        "Game Name: Tom Clancy's Rainbow Six® Siege X\n" +
+                        "Hours played: 264.75\n" +
+                        "\n" +
+                        "Recently Played Games (Hours in the past 2 weeks):\n" +
+                        "- Apex Legends: 15.52 hours \n" +
+                        "- Megabonk: 11.45 hours \n" +
+                        "- Overwatch® 2: 5.40 hours \n" +
+                        "- Escape the Backrooms: 3.83 hours \n" +
+                        "- Middle-earth™: Shadow of Mordor™: 2.02 hours \n",
                 testUser.printUser());
     }
 
