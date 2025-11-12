@@ -23,7 +23,14 @@ public class UserFetcher {
         } catch (IOException | URISyntaxException e) {
             throw new SteamApiException("Failed to fetch game data.", e);
         }
-
+    }
+    public static String getRecentlyPlayedDataAsString(String accountName) throws Exception {
+        try {
+            URLConnection connection = SteamConnection.connectToRecentlyPlayed(SteamConnection.getAccountId(accountName));
+            return readJsonAsString(connection);
+        } catch (IOException | URISyntaxException e) {
+            throw new SteamApiException("Failed to fetch recently played games data.", e);
+        }
     }
 
     public static String readJsonAsString(URLConnection connection) throws IOException, SteamApiException {

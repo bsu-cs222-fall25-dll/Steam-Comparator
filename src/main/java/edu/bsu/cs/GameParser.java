@@ -41,11 +41,28 @@ public class GameParser {
         }
 
     }
+    public static List<Game> parseRecentlyPlayedGames(String jsonRecentlyPlayedData) throws SteamApiException {
+        try {
+            ReadContext context = JsonPath.parse(jsonRecentlyPlayedData);
+            List<Map<String, Object>> games = context.read("$.response.games[*]");
 
-    public static ArrayList<Game> parseRecentGames(String jsonRecentGameData) throws SteamApiException {
-        try{
+            if (games == null || games.isEmpty()) {
+                throw new RuntimeException("No recent games found.");
+            }
 
+            List<Game> recentGames = new ArrayList<>();
+
+            for (Map<String, Object> game : games) {
+                String name = (String) game.get("name");
+                int appID = ((Number) game.get("appid")).intValue();
+                int minutes = ((Number) game.get("playtime_2weeks")).intValue();
+                recentGames.add(new Game(minutes, appID, name));
+            }
+
+            return recentGames.stream().limit(5).toList();
+
+        } catch (Exception e) {
+            throw new SteamApiException("Error parsing recent games data.", e);
         }
-
     }
 }
