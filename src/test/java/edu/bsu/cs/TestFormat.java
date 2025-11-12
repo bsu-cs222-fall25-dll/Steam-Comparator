@@ -22,7 +22,7 @@ public class TestFormat {
     }
 
     @Test
-    public void testUrlParse() throws MalformedURLException, SteamApiException {
+    public void testUrlParse() throws SteamApiException {
         String vanityID = AccountParser.parseAccountName("https://steamcommunity.com/id/tigerlang/");
 
         Assertions.assertEquals("tigerlang", vanityID);
@@ -51,18 +51,20 @@ public class TestFormat {
     @Test
     public void testUserParser() throws SteamApiException {
         User testUser = UserParser.parseUserData(readFileAsString("sampleUserData.json"), readFileAsString("sampleGamesOwned.json"));
-        Assertions.assertEquals("User: Tigerlang\n" +
-                        "User ID: 76561198799220336\n" +
-                        "Most Played Game:\n" +
-                        "Game Name: Tom Clancy's Rainbow Six® Siege X\n" +
-                        "Hours played: 264.75\n" +
-                        "\n" +
-                        "Recently Played Games (Hours in the past 2 weeks):\n" +
-                        "- Apex Legends: 15.52 hours \n" +
-                        "- Megabonk: 11.45 hours \n" +
-                        "- Overwatch® 2: 5.40 hours \n" +
-                        "- Escape the Backrooms: 3.83 hours \n" +
-                        "- Middle-earth™: Shadow of Mordor™: 2.02 hours \n",
+        Assertions.assertEquals("""
+                        User: Tigerlang
+                        User ID: 76561198799220336
+                        Most Played Game:
+                        Game Name: Tom Clancy's Rainbow Six® Siege X
+                        Hours played: 264.75
+                        
+                        Recently Played Games (Hours in the past 2 weeks):
+                        - Apex Legends: 15.52 hours\s
+                        - Megabonk: 11.45 hours\s
+                        - Overwatch® 2: 5.40 hours\s
+                        - Escape the Backrooms: 3.83 hours\s
+                        - Middle-earth™: Shadow of Mordor™: 2.02 hours\s
+                        """,
                 testUser.printUser());
     }
 
