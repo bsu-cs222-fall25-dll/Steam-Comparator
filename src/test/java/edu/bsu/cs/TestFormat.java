@@ -49,7 +49,10 @@ public class TestFormat {
 
     @Test
     public void testUserParser() throws SteamApiException {
-        User testUser = UserParser.parseUserData(readFileAsString("sampleUserData.json"), readFileAsString("sampleGamesOwned.json"));
+        User testUser = UserParser.parseUserData(readFileAsString("sampleUserData.json"),
+                readFileAsString("sampleGamesOwned.json"),
+                readFileAsString("sampleRecentlyPlayed.json"));
+
         Assertions.assertEquals("""
                         User: Tigerlang
                         User ID: 76561198799220336

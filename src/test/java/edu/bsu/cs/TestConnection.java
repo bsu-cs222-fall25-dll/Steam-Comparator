@@ -61,7 +61,7 @@ public class TestConnection {
     @Test
     public void testParseUserDataThrowsOnInvalidJson() {
         Assertions.assertThrows(SteamApiException.class, () ->
-                UserParser.parseUserData("{}", "{}"));
+                UserParser.parseUserData("{}", "{}","{}" ));
     }
     @Test
     public void testPrintGameFormatting() {
