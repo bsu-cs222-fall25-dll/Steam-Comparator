@@ -8,9 +8,9 @@ public record User(String steamID, String displayName, Game mostPlayed, List<Gam
         StringBuilder sb = new StringBuilder();
         sb.append("User: ").append(displayName())
                 .append("\nUser ID: ").append(steamID())
-                .append("\nMost Played Game:\n")
+                .append("\nMost Played Game: ")
                 .append(mostPlayed.printGame())
-                .append("\n\nRecently Played Games (Hours in the past 2 weeks):\n");
+                .append("\n\nRecently Played Games (hours are from the last two weeks):\n");
 
         for (Game g : recentGames) {
             sb.append("- ").append(g.gameName())
