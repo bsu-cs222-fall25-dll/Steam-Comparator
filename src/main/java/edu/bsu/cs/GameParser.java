@@ -59,7 +59,7 @@ public class GameParser {
                 recentGames.add(new Game(minutes, appID, name));
             }
 
-            return recentGames.stream().limit(5).toList();
+            return recentGames.stream().toList();
 
         } catch (Exception e) {
             throw new SteamApiException("Error parsing recent games data.", e);

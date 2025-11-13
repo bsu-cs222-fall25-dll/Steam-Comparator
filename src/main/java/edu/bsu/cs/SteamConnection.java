@@ -26,21 +26,17 @@ public class SteamConnection {
     }
 
     public static URLConnection connectToUser(String accountID) throws IOException, URISyntaxException {
-        String urlString = "https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/"
-                + "?key=" + KEY + "&steamids=" + accountID;
+        String urlString = "https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/" + "?key=" + KEY + "&steamids=" + accountID;
         return openConnection(urlString);
     }
 
     public static URLConnection connectToGames(String accountID) throws IOException, URISyntaxException {
-        String urlString = "https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/"
-                + "?key=" + KEY + "&steamid=" + accountID
-                + "&include_appinfo=1&include_played_free_games=1&format=json";
+        String urlString = "https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/" + "?key=" + KEY + "&steamid=" + accountID + "&include_appinfo=1&include_played_free_games=1&format=json";
         return openConnection(urlString);
     }
 
     public static URLConnection connectToRecentlyPlayed(String accountID) throws IOException, URISyntaxException {
-        String urlString = "https://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/"
-                + "?key=" + KEY + "&steamid=" + accountID + "&format=json";
+        String urlString = "https://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/" + "?key=" + KEY + "&steamid=" + accountID + "&count=5&format=json";
         return openConnection(urlString);
     }
 

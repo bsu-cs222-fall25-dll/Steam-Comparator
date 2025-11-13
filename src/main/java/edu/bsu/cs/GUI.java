@@ -1,6 +1,8 @@
 package edu.bsu.cs;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -9,6 +11,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -38,6 +41,7 @@ public class GUI extends Application {
     private Pane createRoot() {
         inputField1 = new TextField();
         outputField1 = new TextArea();
+        outputField1.setPrefHeight(300);
         outputField1.setEditable(false);
 
         VBox leftColumn = new VBox(5);
@@ -48,6 +52,7 @@ public class GUI extends Application {
         
         inputField2 = new TextField();
         outputField2 = new TextArea();
+        outputField2.setPrefHeight(300);
         outputField2.setEditable(false);
 
         VBox rightColumn = new VBox(5);
@@ -61,7 +66,7 @@ public class GUI extends Application {
     }
 
     private HBox getHBox(VBox leftColumn, VBox rightColumn) {
-        Button enterAllButton = new Button("Enter All");
+        Button enterAllButton = new Button("Compare");
         enterAllButton.setDefaultButton(true);
         enterAllButton.setOnAction(e -> {
             try {
@@ -73,8 +78,10 @@ public class GUI extends Application {
         });
 
         VBox buttonBox = new VBox(enterAllButton);
-        HBox root = new HBox(10, leftColumn, rightColumn, buttonBox);
-        root.setPrefSize(900, 400);
+        buttonBox.setPadding(new Insets(200,0,0,0));
+        HBox root = new HBox(10, leftColumn, buttonBox,rightColumn);
+        root.setAlignment(Pos.CENTER);
+        root.setPadding(new Insets(20));
         return root;
     }
 
