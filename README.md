@@ -1,14 +1,48 @@
-<h1>Steam Comparator</h1>
+# Steam Comparator
 
-Caleb Langley, Lucas Lehman, Will McRoberts
+This project allows a user to enter multiple steam custom profile url and displays their account information, including display name, Steam ID, most played game and hours, and the five most recent games played with hours.
+This program runs on command line, and in a graphical user interface.
+
+## Authors
+Group A: Caleb Langley, Lucas Lehman, Will McRoberts
+
+## Running the Program
+Both CLI and GUI work with the same idea, [enter the Steam profile URL](#obtaining-a-steam-profile-url) then press "enter" to see the stats! 
+When using the GUI the user can either press the "enter" key or press the `Compare` button in the GUI.
+
+### Running CLI
+1. Right click on the `Main.java` file  
+2. Click run
+
+### Running GUI
+1. Click on the Gradle icon in the top right
+2. Click drop downs on FinalProject-SteamComparator -> Tasks -> application  
+3. Double click run
 
 
-This project allows a user to enter multiple steam custom profile url and displays their account information and most played game with the time played.
+## API Key
+### Applying for a key
 
-To run this project in command line the user will run the `Main.java` file
-If you want to use a GUI then run the `GUI.java` file. Both work with the same idea, enter the steam profile url then press enter to see the stats! When using the GUI the user can either press the enter key or press the Enter All button in the GUI.
+__You must have a Steam account that has spent $5 in order to get a key__
 
+1. Head to this link: https://steamcommunity.com/dev/apikey  
+2. Agree to the terms and services  
+3. Click the "Register" button
 
-In order to use this application, the user must apply for and get a steam key for themselves here: https://steamcommunity.com/dev/apikey, then after getting the key right click on the `.gitignore` file and create a new file. Call this file `config.properties` and input your key like this: `steam.api.key = ENTERYOURKEYHERE`
+### Giving the key to the Program
 
+1. Head to the Intellij project<br>
+2. Scroll down to the `.gitignore` and right click on it<br>
+3. Click New -> File<br>
+4. Name the file `config.properties`  
+5. Inside `config.properties` input your key like this:
 
+```
+steam.api.key = ENTER_YOUR_KEY_HERE
+```
+
+## Obtaining a Steam profile URL
+1. Head to a Steam account
+2. Locate URL: near the top of the window, there is what appears to be a search bar with a link
+3. Click on the link
+4. It is now copied to you clipboard
