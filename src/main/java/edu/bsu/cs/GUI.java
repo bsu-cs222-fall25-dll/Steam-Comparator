@@ -39,7 +39,7 @@ public class GUI extends Application {
     }
 
     private Pane createRoot() {
-        inputField1 = new TextField();
+        inputField1 = new TextField("Enter Steam link");
         outputField1 = new TextArea();
         outputField1.setPrefHeight(300);
         outputField1.setEditable(false);
