@@ -32,7 +32,8 @@ public class GameParser {
             if (mostPlayed != null){
                 String gameName = (String) mostPlayed.get("name");
                 int appID = ((Number) mostPlayed.get("appid")).intValue();
-                return new Game(highestMinutes, appID, gameName);
+                int rtime = 0;
+                return new Game(highestMinutes, appID, rtime ,gameName);
             } else {
                 throw new RuntimeException("Couldn't parse for most played game.");
             }
@@ -43,6 +44,7 @@ public class GameParser {
     }
     public static List<Game> parseRecentlyPlayedGames(String jsonRecentlyPlayedData) throws SteamApiException {
         try {
+            int rtime = 0;
             ReadContext context = JsonPath.parse(jsonRecentlyPlayedData);
             List<Map<String, Object>> games = context.read("$.response.games[*]");
 
@@ -56,7 +58,7 @@ public class GameParser {
                 String name = (String) game.get("name");
                 int appID = ((Number) game.get("appid")).intValue();
                 int minutes = ((Number) game.get("playtime_2weeks")).intValue();
-                recentGames.add(new Game(minutes, appID, name));
+                recentGames.add(new Game(minutes, appID, rtime,name));
             }
 
             return recentGames.stream().toList();
