@@ -11,7 +11,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -49,7 +48,7 @@ public class GUI extends Application {
                 new Label("Steam Link:"), inputField1,
                 new Label("Information:"), outputField1
         );
-        
+
         inputField2 = new TextField();
         outputField2 = new TextArea();
         outputField2.setPrefHeight(300);
@@ -68,6 +67,17 @@ public class GUI extends Application {
     private HBox getHBox(VBox leftColumn, VBox rightColumn) {
         Button enterAllButton = new Button("Compare");
         enterAllButton.setDefaultButton(true);
+
+        ComboBox<String> compareOptions = new ComboBox<>();
+        compareOptions.getItems().addAll("Most hours", "Recent hours");
+        compareOptions.setValue("Most hours");
+        compareOptions.setPrefWidth(100);
+
+        ComboBox<Integer> amountOfGames = new ComboBox<>();
+        amountOfGames.getItems().addAll(5,10,15);
+        amountOfGames.setValue(10);
+        amountOfGames.setPrefWidth(55);
+
         enterAllButton.setOnAction(e -> {
             try {
                 displayUser(inputField1, outputField1);
@@ -77,8 +87,9 @@ public class GUI extends Application {
             }
         });
 
-        VBox buttonBox = new VBox(enterAllButton);
-        buttonBox.setPadding(new Insets(200,0,0,0));
+        VBox buttonBox = new VBox(20,amountOfGames, compareOptions, enterAllButton);
+        buttonBox.setAlignment(Pos.TOP_CENTER);
+        buttonBox.setPadding(new Insets(100,0,0,0));
         HBox root = new HBox(10, leftColumn, buttonBox,rightColumn);
         root.setAlignment(Pos.CENTER);
         root.setPadding(new Insets(20));
