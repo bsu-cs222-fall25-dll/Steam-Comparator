@@ -39,25 +39,29 @@ public class GUI extends Application {
 
     private Pane createRoot() {
         inputField1 = new TextField();
+        inputField1.setPromptText("Enter Steam Link:");
         outputField1 = new TextArea();
+        outputField1.setPromptText("Profile Data Appears Here");
         outputField1.setPrefHeight(300);
         outputField1.setEditable(false);
 
         VBox leftColumn = new VBox(5);
         leftColumn.getChildren().addAll(
-                new Label("Steam Link:"), inputField1,
-                new Label("Information:"), outputField1
+                inputField1,
+                new Label(" "), outputField1
         );
 
         inputField2 = new TextField();
+        inputField2.setPromptText("Enter Steam Link:");
         outputField2 = new TextArea();
+        outputField2.setPromptText("Profile Data Appears Here");
         outputField2.setPrefHeight(300);
         outputField2.setEditable(false);
 
         VBox rightColumn = new VBox(5);
         rightColumn.getChildren().addAll(
-                new Label("Steam Link:"), inputField2,
-                new Label("Information:"), outputField2
+                inputField2,
+                new Label(" "), outputField2
         );
 
         return getHBox(leftColumn, rightColumn);
