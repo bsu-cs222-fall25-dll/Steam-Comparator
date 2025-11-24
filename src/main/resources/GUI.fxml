@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="640.0" prefWidth="979.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CONTROLLER_NAME">
+<AnchorPane prefHeight="640.0" prefWidth="979.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.bsu.cs.Controller">
    <children>
       <TextArea editable="false" layoutX="14.0" layoutY="208.0" prefHeight="418.0" prefWidth="456.0" />
       <TextArea editable="false" layoutX="507.0" layoutY="208.0" prefHeight="418.0" prefWidth="456.0" />
