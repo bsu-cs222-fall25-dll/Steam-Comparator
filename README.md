@@ -31,8 +31,8 @@ __You must have a Steam account that has spent $5 in order to get a key__
 
 ### Giving the key to the program
 
-1. Head to the Intellij project<br>
-2. Scroll down to the `.gitignore` and right click on it<br>
+1. Head to the Intellij project
+2. Scroll down to the `.gitignore` and right click on it
 3. Click `New` -> `File`
 4. Name the file `config.properties`  
 5. Inside `config.properties` input your key like this:
@@ -46,3 +46,12 @@ steam.api.key = ENTER_YOUR_KEY_HERE
 2. Locate URL: near the top of the window, there is what appears to be a search bar with a link
 3. Click on the link
 4. It is now copied to you clipboard
+
+### Example Steam profile URLs
+```
+https://steamcommunity.com/id/tigerlang
+```
+
+```
+https://steamcommunity.com/id/YouAreStrongerThanYouKnow
+```
