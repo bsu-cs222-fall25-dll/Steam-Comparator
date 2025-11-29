@@ -18,19 +18,19 @@ public class UserParser {
         }
     }
 
-    public static String parseSteamID(String jsonUserData) {
-        try {
-            return JsonPath.read(jsonUserData, "$.response.players[0].steamid");
+    public static String parseUserInfo(String jsonUserData, String infoType) {
+        try{
+            return JsonPath.read(jsonUserData, "$.response.players[0]." + infoType);
         } catch (Exception e) {
-            throw new RuntimeException("Failed to parse SteamID" + e.getMessage(), e);
+            throw new RuntimeException("Failed to parse user info" + e.getMessage());
         }
     }
 
+    public static String parseSteamID(String jsonUserData) {
+            return parseUserInfo(jsonUserData, "steamid");
+    }
+
     public static String parseDisplayName(String jsonUserData) {
-        try {
-            return JsonPath.read(jsonUserData, "$.response.players[0].personaname");
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to parse display name" + e.getMessage(), e);
-        }
+            return parseUserInfo(jsonUserData, "personaname");
     }
 }
