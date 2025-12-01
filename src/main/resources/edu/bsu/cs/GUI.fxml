@@ -20,12 +20,15 @@
         <TextArea fx:id="outputField1" editable="false" prefHeight="300" promptText="Profile Data Appears Here" />
     </VBox>
 
-    <VBox alignment="TOP_CENTER" spacing="20">
+    <VBox alignment="TOP_CENTER" spacing="8">
         <padding>
-            <Insets top="100" />
+            <Insets top="70" />
         </padding>
-        <ComboBox fx:id="amountOfGames" prefWidth="55" />
-        <ComboBox fx:id="compareOptions" prefWidth="100" />
+        <Label text="Games to Display:" />
+        <ComboBox fx:id="amountOfGames" prefWidth="70" />
+        <Label text="" />
+        <ComboBox fx:id="compareOptions" prefWidth="120" />
+        <Label text="" />
         <Button fx:id="enterAllButton" defaultButton="true" onAction="#handleCompareAction" text="Compare" />
     </VBox>
 

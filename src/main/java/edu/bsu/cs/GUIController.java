@@ -23,7 +23,7 @@ public class GUIController {
         compareOptions.getItems().addAll("Most hours", "Recent hours");
         compareOptions.setValue("Most hours");
 
-        amountOfGames.getItems().addAll(5, 10, 15);
+        amountOfGames.getItems().addAll(5, 10, 25, 50);
         amountOfGames.setValue(10);
     }
 
