@@ -3,15 +3,14 @@ package edu.bsu.cs;
 import java.util.List;
 
 public class SortingAlgorithm {
-    public static List<Game> quickSort(List<Game> gameList, String time)
-    {
+    public static List<Game> quickSort(List<Game> gameList, String time) {
         int lowIndex = 0;
-        int highIndex= gameList.size() - 1;
+        int highIndex = gameList.size() - 1;
         quickSortAlgo(gameList, lowIndex, highIndex, time);
         return gameList;
     }
 
-    private static void quickSortAlgo(List<Game> gameList, int lowIndex, int highIndex, String time){
+    private static void quickSortAlgo(List<Game> gameList, int lowIndex, int highIndex, String time) {
         if (time.equals("rTime")) {
 
             if (lowIndex >= highIndex) {
@@ -34,10 +33,10 @@ public class SortingAlgorithm {
         }
     }
 
-    private static int partitionRTime(List<Game> gameList, int lowIndex, int highIndex, Game pivot){
-        int leftPointer=lowIndex;
-        int rightPointer=highIndex;
-        while(leftPointer<rightPointer) {
+    private static int partitionRTime(List<Game> gameList, int lowIndex, int highIndex, Game pivot) {
+        int leftPointer = lowIndex;
+        int rightPointer = highIndex;
+        while (leftPointer < rightPointer) {
             while (gameList.get(leftPointer).rTime() <= pivot.rTime() && leftPointer < rightPointer) {
                 leftPointer++;
             }
@@ -50,10 +49,10 @@ public class SortingAlgorithm {
         return leftPointer;
     }
 
-    private static int partitionMinutes(List<Game> gameList, int lowIndex, int highIndex, Game pivot){
-        int leftPointer=lowIndex;
-        int rightPointer=highIndex;
-        while(leftPointer<rightPointer) {
+    private static int partitionMinutes(List<Game> gameList, int lowIndex, int highIndex, Game pivot) {
+        int leftPointer = lowIndex;
+        int rightPointer = highIndex;
+        while (leftPointer < rightPointer) {
             while (gameList.get(leftPointer).minutes() <= pivot.minutes() && leftPointer < rightPointer) {
                 leftPointer++;
             }
@@ -71,3 +70,4 @@ public class SortingAlgorithm {
         gameList.set(i, gameList.get(j));
         gameList.set(j, temp);
     }
+}

@@ -14,7 +14,7 @@ public record User(String steamID, String displayName, Game mostPlayed, List<Gam
 
         for (Game g : recentGames) {
             sb.append("- ").append(g.gameName())
-                    .append(": ").append(String.format("%.2f", g.minutes() / 60.0)).append(" hours \n");
+                    .append(": ").append(String.format("%.1f", g.minutes() / 60.0)).append(" hours \n");
         }
         return sb.toString();
     }

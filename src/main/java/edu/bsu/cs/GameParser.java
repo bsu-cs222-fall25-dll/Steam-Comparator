@@ -65,4 +65,41 @@ public class GameParser {
             throw new SteamApiException("Error parsing recent games data.", e);
         }
     }
+    public static List<Game> parseGames(String jsonGameData, String boxValue) throws SteamApiException {
+        String timePlayed = checkMostOrRecentHours(boxValue);
+
+        try {
+            ReadContext context = JsonPath.parse(jsonGameData);
+            List<Map<String, Object>> allGames = context.read("$.response.games[*]");
+
+            List<Game> games = storeGamesInList(allGames);
+
+            return SortingAlgorithm.quickSort(games, timePlayed);
+        } catch (Exception e) {
+            throw new SteamApiException("Error parsing recent games data.", e);
+        }
+    }
+
+    public static String checkMostOrRecentHours(String value) {
+        if (value.equals("0")) {
+            return "minutes";
+        } else {
+            return "rTime";
+        }
+    }
+
+    public static List<Game> storeGamesInList(List<Map<String, Object>> allGames) {
+        List<Game> games = new ArrayList<>();
+
+        for (Map<String, Object> game: allGames) {
+            String name = (String) game.get("name");
+            int appID = ((Number) game.get("appid")).intValue();
+            int minutes = ((Number) game.get("playtime_forever")).intValue();
+            int rTime = ((Number) game.get("rtime_last_played")).intValue();
+            games.add(new Game(minutes, appID,rTime, name));
+        }
+
+        return games;
+    }
 }
+
