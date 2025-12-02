@@ -5,16 +5,24 @@ This program runs on command line, and in a graphical user interface.
 
 ## Authors
 Group A: Caleb Langley, Lucas Lehman, Will McRoberts
-
-## Running the Program
+## Setup
+### Cloning the Project
+1. Copy this link: `https://github.com/bsu-cs222-fall25-dll/Steam-Comparator.git`
+2. Open Intellij
+3. In the top right click `Clone Repository`
+4. Pasete the copied URL
+5. Click the blue `Clone` button in the bottom left
+6. Setup [API key](#api-key)
+   
+### Running the Program
 Both CLI and GUI work with the same idea, [enter the Steam profile URL](#obtaining-a-steam-profile-url) then press "enter" to see the stats! 
 When using the GUI the user can either press the "enter" key or press the `Compare` button in the GUI. __You must have an [API key](#api-key) to run the program.__
 
-### Running CLI
+#### Running CLI
 1. Right click on the `Main.java` file  
 2. Click run
 
-### Running GUI
+#### Running GUI
 1. Click on the Gradle icon in the top right
 2. Click the drop down arrows on `FinalProject-SteamComparator` -> `Tasks` -> `application`
 3. Double click run
