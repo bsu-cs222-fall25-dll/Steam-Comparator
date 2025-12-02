@@ -16,8 +16,7 @@ public class SteamConnection {
         }
 
         try {
-            URI uri = new URI("https://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/"
-                    + "?key=" + KEY + "&vanityurl=" + accountName);
+            URI uri = new URI("https://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/" + "?key=" + KEY + "&vanityurl=" + accountName);
             String response = fetchUrlAsString(uri);
             return AccountParser.parseAccountId(response);
         } catch (URISyntaxException | IOException e) {
