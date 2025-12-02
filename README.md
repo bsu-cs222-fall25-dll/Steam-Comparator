@@ -7,7 +7,10 @@ This program runs on command line, and in a graphical user interface.
 Group A: Caleb Langley, Lucas Lehman, Will McRoberts
 ## Setup
 ### Cloning the Project
-1. Copy this link: `https://github.com/bsu-cs222-fall25-dll/Steam-Comparator.git`
+1. Copy this link:
+```
+    `https://github.com/bsu-cs222-fall25-dll/Steam-Comparator.git`
+```
 2. Open Intellij
 3. In the top right click `Clone Repository`
 4. Pasete the copied URL
