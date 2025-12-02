@@ -4,17 +4,18 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="640.0" prefWidth="979.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.bsu.cs.Controller">
-   <children>
-      <TextArea editable="false" layoutX="14.0" layoutY="208.0" prefHeight="418.0" prefWidth="456.0" />
-      <TextArea editable="false" layoutX="507.0" layoutY="208.0" prefHeight="418.0" prefWidth="456.0" />
-      <TextField layoutX="124.0" layoutY="110.0" prefHeight="25.0" prefWidth="236.0" promptText="Enter Steam URL" />
-      <TextField layoutX="617.0" layoutY="110.0" prefHeight="25.0" prefWidth="236.0" promptText="Enter Steam URL" />
-      <Button layoutX="455.0" layoutY="163.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="69.0" text="Compare" />
-      <ComboBox fx:id="gamesComboBox" layoutX="415.0" layoutY="110.0" prefWidth="150.0" promptText="List of games" visibleRowCount="2" />
-      <TextField layoutX="423.0" layoutY="78.0" prefHeight="25.0" prefWidth="134.0" promptText="# of games" text="10" />
-   </children>
-   <cursor>
-      <Cursor fx:constant="DEFAULT" />
-   </cursor>
+
+<AnchorPane prefHeight="640.0" prefWidth="979.0" xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.bsu.cs.Controller">
+    <cursor>
+        <Cursor fx:constant="DEFAULT"/>
+    </cursor>
+    <TextArea editable="false" layoutX="14.0" layoutY="208.0" prefHeight="418.0" prefWidth="456.0"/>
+    <TextArea editable="false" layoutX="507.0" layoutY="208.0" prefHeight="418.0" prefWidth="456.0"/>
+    <TextField layoutX="124.0" layoutY="110.0" prefHeight="25.0" prefWidth="236.0" promptText="Enter Steam URL"/>
+    <TextField layoutX="617.0" layoutY="110.0" prefHeight="25.0" prefWidth="236.0" promptText="Enter Steam URL"/>
+    <Button layoutX="455.0" layoutY="163.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="69.0" text="Compare"/>
+    <ComboBox fx:id="gamesComboBox" layoutX="415.0" layoutY="110.0" prefWidth="150.0" promptText="List of games"
+              visibleRowCount="2"/>
+    <TextField layoutX="423.0" layoutY="78.0" prefHeight="25.0" prefWidth="134.0" promptText="# of games" text="10"/>
 </AnchorPane>
