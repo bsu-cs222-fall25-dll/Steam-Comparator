@@ -6,35 +6,44 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox alignment="CENTER" spacing="10" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.bsu.cs.GUIController">
-    <padding>
-        <Insets bottom="20" left="20" right="20" top="20" />
-    </padding>
+<!-- Corrected the JavaFX version to 21 to match the project settings -->
+<AnchorPane prefHeight="600.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.bsu.cs.GUIController">
 
-    <VBox spacing="5">
-        <TextField fx:id="inputField1" promptText="Enter Steam Link:" />
-        <Label text=" " />
-        <TextArea fx:id="outputField1" editable="false" prefHeight="300" promptText="Profile Data Appears Here" />
+    <!-- Main container -->
+    <VBox layoutX="10.0" layoutY="10.0" spacing="10" AnchorPane.topAnchor="10.0" AnchorPane.leftAnchor="10.0"
+          AnchorPane.rightAnchor="10.0" AnchorPane.bottomAnchor="10.0">
+
+        <!-- Top controls area -->
+        <HBox alignment="BOTTOM_LEFT" spacing="20">
+            <VBox>
+                <Label text="User 1"/>
+                <TextField fx:id="inputField1" prefWidth="300.0" promptText="Enter Steam Profile URL or ID"/>
+            </VBox>
+            <VBox>
+                <Label text="User 2"/>
+                <TextField fx:id="inputField2" prefWidth="300.0" promptText="Enter Steam Profile URL or ID"/>
+            </VBox>
+            <VBox>
+                <Label text="Sort By"/>
+                <ComboBox fx:id="compareOptions" prefWidth="120.0"/>
+            </VBox>
+            <VBox>
+                <Label text="Games to Display"/>
+                <ComboBox fx:id="amountOfGames" prefWidth="120.0"/>
+            </VBox>
+            <Button onAction="#handleCompareAction" text="Compare" prefHeight="25.0"/>
+        </HBox>
+
+        <!-- Output areas -->
+        <HBox spacing="10" VBox.vgrow="ALWAYS">
+            <TextArea fx:id="outputField1" editable="false" prefHeight="500.0" HBox.hgrow="ALWAYS"/>
+            <TextArea fx:id="outputField2" editable="false" prefHeight="500.0" HBox.hgrow="ALWAYS"/>
+        </HBox>
     </VBox>
 
-    <VBox alignment="TOP_CENTER" spacing="8">
-        <padding>
-            <Insets top="70" />
-        </padding>
-        <Label text="Games to Display:" />
-        <ComboBox fx:id="amountOfGames" prefWidth="70" />
-        <Label text="" />
-        <ComboBox fx:id="compareOptions" prefWidth="120" />
-        <Label text="" />
-        <Button fx:id="enterAllButton" defaultButton="true" onAction="#handleCompareAction" text="Compare" />
-    </VBox>
-
-    <VBox spacing="5">
-        <TextField fx:id="inputField2" promptText="Enter Steam Link:" />
-        <Label text=" " />
-        <TextArea fx:id="outputField2" editable="false" prefHeight="300" promptText="Profile Data Appears Here" />
-    </VBox>
-</HBox>
+</AnchorPane>
