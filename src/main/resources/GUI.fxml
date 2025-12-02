@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<!-- Layout based directly on the user-provided code snippet -->
 <HBox alignment="CENTER" spacing="10" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.bsu.cs.GUIController">
     <padding>
         <Insets bottom="20" left="20" right="20" top="20"/>
@@ -29,12 +28,9 @@
             <Insets top="100.0"/>
         </padding>
         <Label text="Sort By"/>
-        <!-- prefWidth removed to allow natural sizing -->
         <ComboBox fx:id="compareOptions"/>
         <Label text="Games to Display"/>
-        <!-- prefWidth removed to allow natural sizing -->
         <ComboBox fx:id="amountOfGames"/>
-        <!-- Reverted to defaultButton="true" and removed prefWidth -->
         <Button onAction="#handleCompareAction" text="Compare" defaultButton="true"/>
     </VBox>
 

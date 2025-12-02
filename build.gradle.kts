@@ -13,26 +13,26 @@ repositories {
     mavenCentral()
 }
 
-// A stable configuration setting Java and JavaFX to version 21 (LTS)
 java {
     sourceCompatibility = JavaVersion.VERSION_21
     targetCompatibility = JavaVersion.VERSION_21
 }
 
-javafx {
-    version = "21"
-    modules("javafx.controls", "javafx.fxml")
+configurations.all {
+    resolutionStrategy.force("net.minidev:json-smart:2.5.1")
 }
 
 dependencies {
-    // Your project's libraries
     implementation("com.jayway.jsonpath:json-path:2.9.0")
-    implementation("net.minidev:json-smart:2.5.0")
     implementation("org.slf4j:slf4j-nop:2.0.11")
 
-    // Test dependencies
     testImplementation(platform("org.junit:junit-bom:5.10.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+}
+
+javafx {
+    version = "21"
+    modules("javafx.controls", "javafx.fxml")
 }
 
 application {
