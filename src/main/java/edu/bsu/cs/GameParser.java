@@ -6,7 +6,7 @@ import com.jayway.jsonpath.ReadContext;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
+// Refactor Class
 public class GameParser {
     public static Game parseMostPlayedGame(String jsonGameData) throws SteamApiException {
         try{
