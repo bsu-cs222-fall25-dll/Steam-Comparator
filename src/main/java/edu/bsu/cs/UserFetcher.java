@@ -22,25 +22,25 @@ public class UserFetcher {
         URLConnection connect(String accountID) throws IOException, URISyntaxException;
     }
 
-    private static String fetchData(String accountName, Connector connector, String errorMessage) throws SteamApiException {
+    private static String fetchData(String accountName, Connector connector) throws SteamApiException {
         try {
             String accountID = SteamConnection.getAccountId(accountName);
             URLConnection connection = connector.connect(accountID);
             return readJsonAsString(connection);
         } catch (Exception e) {
-            throw new SteamApiException(errorMessage, e);
+            throw new SteamApiException("Failed to fetch data", e);
         }
     }
 
     public static String getUserDataAsString(String accountName) throws SteamApiException {
-        return fetchData(accountName, SteamConnection::connectToUser, "Failed to fetch user data.");
+        return fetchData(accountName, SteamConnection::connectToUser);
     }
 
     public static String getOwnedGamesAsString(String accountName) throws SteamApiException {
-        return fetchData(accountName, SteamConnection::connectToGames, "Failed to fetch game data.");
+        return fetchData(accountName, SteamConnection::connectToGames);
     }
 
     public static String getRecentlyPlayedDataAsString(String accountName) throws SteamApiException {
-        return fetchData(accountName, SteamConnection::connectToRecentlyPlayed, "Failed to fetch recently played games data.");
+        return fetchData(accountName, SteamConnection::connectToRecentlyPlayed);
     }
 }
