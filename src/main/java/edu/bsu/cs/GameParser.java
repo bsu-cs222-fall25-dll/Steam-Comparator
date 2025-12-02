@@ -1,6 +1,7 @@
 package edu.bsu.cs;
 
 import com.jayway.jsonpath.JsonPath;
+import com.jayway.jsonpath.PathNotFoundException;
 import com.jayway.jsonpath.ReadContext;
 
 import java.util.ArrayList;
@@ -8,98 +9,63 @@ import java.util.List;
 import java.util.Map;
 
 public class GameParser {
-    public static Game parseMostPlayedGame(String jsonGameData) throws SteamApiException {
-        try{
+
+    public static List<Game> parseAllGames(String jsonGameData) throws SteamApiException {
+        try {
             ReadContext context = JsonPath.parse(jsonGameData);
-
+            // This path can be missing if the profile is private or has no games.
             List<Map<String, Object>> games = context.read("$.response.games[*]");
-
-            if (games == null || games.isEmpty()){
-                throw new RuntimeException("No games found in the JSON data.");
-            }
-
-            Map<String, Object> mostPlayed = null;
-            int highestMinutes = -1;
-
-            for (Map<String, Object> game : games){
-                int playtime = ((Number) game.get("playtime_forever")).intValue();
-                if (playtime > highestMinutes) {
-                    highestMinutes = playtime;
-                    mostPlayed = game;
-                }
-            }
-
-            if (mostPlayed != null){
-                String gameName = (String) mostPlayed.get("name");
-                int appID = ((Number) mostPlayed.get("appid")).intValue();
-                return new Game(highestMinutes, appID, gameName);
-            } else {
-                throw new RuntimeException("Couldn't parse for most played game.");
-            }
+            return storeGamesInList(games);
+        } catch (PathNotFoundException e) {
+            // This is an expected case for private profiles, return an empty list.
+            return new ArrayList<>();
         } catch (Exception e) {
-            throw new SteamApiException("Error parsing game data.", e);
+            throw new SteamApiException("Error parsing all games data.", e);
         }
-
     }
+
     public static List<Game> parseRecentlyPlayedGames(String jsonRecentlyPlayedData) throws SteamApiException {
         try {
             ReadContext context = JsonPath.parse(jsonRecentlyPlayedData);
+            // The 'games' array may not exist if there are no recent games.
             List<Map<String, Object>> games = context.read("$.response.games[*]");
 
             if (games == null || games.isEmpty()) {
-                throw new RuntimeException("No recent games found.");
+                return new ArrayList<>();
             }
 
             List<Game> recentGames = new ArrayList<>();
-
             for (Map<String, Object> game : games) {
                 String name = (String) game.get("name");
                 int appID = ((Number) game.get("appid")).intValue();
+                // Use "playtime_2weeks" for the minutes value in the context of recent games
                 int minutes = ((Number) game.get("playtime_2weeks")).intValue();
-                recentGames.add(new Game(minutes, appID, name));
+                // The recent games API doesn't provide rtime_last_played, so we use 0 as a placeholder.
+                // The list is already sorted by recency from the API.
+                recentGames.add(new Game(minutes, appID, 0, name));
             }
-
-            return recentGames.stream().toList();
-
-        } catch (Exception e) {
-            throw new SteamApiException("Error parsing recent games data.", e);
-        }
-    }
-    public static List<Game> parseGames(String jsonGameData, String boxValue) throws SteamApiException {
-        String timePlayed = checkMostOrRecentHours(boxValue);
-
-        try {
-            ReadContext context = JsonPath.parse(jsonGameData);
-            List<Map<String, Object>> allGames = context.read("$.response.games[*]");
-
-            List<Game> games = storeGamesInList(allGames);
-
-            return SortingAlgorithm.quickSort(games, timePlayed);
+            return recentGames;
+        } catch (PathNotFoundException e) {
+            // This is expected if the user has no recently played games.
+            return new ArrayList<>();
         } catch (Exception e) {
             throw new SteamApiException("Error parsing recent games data.", e);
         }
     }
 
-    public static String checkMostOrRecentHours(String value) {
-        if (value.equals("0")) {
-            return "minutes";
-        } else {
-            return "rTime";
+    private static List<Game> storeGamesInList(List<Map<String, Object>> allGames) {
+        if (allGames == null) {
+            return new ArrayList<>();
         }
-    }
-
-    public static List<Game> storeGamesInList(List<Map<String, Object>> allGames) {
         List<Game> games = new ArrayList<>();
-
-        for (Map<String, Object> game: allGames) {
+        for (Map<String, Object> game : allGames) {
             String name = (String) game.get("name");
             int appID = ((Number) game.get("appid")).intValue();
             int minutes = ((Number) game.get("playtime_forever")).intValue();
-            int rTime = ((Number) game.get("rtime_last_played")).intValue();
-            games.add(new Game(minutes, appID,rTime, name));
+            // rtime_last_played is not always present, so default to 0
+            int rTime = game.containsKey("rtime_last_played") ? ((Number) game.get("rtime_last_played")).intValue() : 0;
+            games.add(new Game(minutes, appID, rTime, name));
         }
-
         return games;
     }
 }
-
