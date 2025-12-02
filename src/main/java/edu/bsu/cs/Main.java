@@ -17,7 +17,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        URL fxmlLocation = getClass().getResource("/edu/bsu/cs/GUI.fxml");
+        URL fxmlLocation = getClass().getResource("/GUI.fxml");
         FXMLLoader loader = new FXMLLoader(fxmlLocation);
         Parent root = loader.load();
 

@@ -1,4 +1,1 @@
 rootProject.name = 'FinalProject-SteamComparator'
-
-
-include 'src:main:resources'
