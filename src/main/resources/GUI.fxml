@@ -9,13 +9,11 @@
         <Insets bottom="20" left="20" right="20" top="20" />
     </padding>
 
-
     <VBox spacing="5">
         <Label text="User 1" />
         <TextField fx:id="inputField1" promptText="Enter Steam Profile URL or ID" />
-        <TextArea fx:id="outputField1" editable="false" prefHeight="400" prefWidth="350" promptText="Profile Data Appears Here" />
+        <ListView fx:id="gameListView1" prefHeight="400" prefWidth="350" />
     </VBox>
-
 
     <VBox alignment="TOP_CENTER" spacing="8">
         <padding>
@@ -26,22 +24,11 @@
         <Label text="Games to Display" />
         <ComboBox fx:id="amountOfGames" />
         <Button defaultButton="true" onAction="#handleCompareAction" text="Compare" />
-      <GridPane>
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints />
-            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-      </GridPane>
     </VBox>
-
 
     <VBox spacing="5">
         <Label text="User 2" />
         <TextField fx:id="inputField2" promptText="Enter Steam Profile URL or ID" />
-        <TextArea fx:id="outputField2" editable="false" prefHeight="400" prefWidth="350" promptText="Profile Data Appears Here" />
+        <ListView fx:id="gameListView2" prefHeight="400" prefWidth="350" />
     </VBox>
 </HBox>
