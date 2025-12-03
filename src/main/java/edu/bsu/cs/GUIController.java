@@ -87,8 +87,18 @@ public class GUIController {
 
             displayUser(inputField1, gameListView1, sortOption, numberOfGames);
             displayUser(inputField2, gameListView2, sortOption, numberOfGames);
+        } catch (SteamApiException ex) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText(ex.getMessage());
+            alert.showAndWait();
         } catch (Exception ex) {
-            displayError(ex.getMessage());
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Unexpected Error");
+            alert.setHeaderText("An unexpected error occurred.");
+            alert.setContentText("Please check the console for more details.");
+            alert.showAndWait();
         }
     }
 
@@ -117,15 +127,9 @@ public class GUIController {
             gamesToDisplay = SortingAlgorithm.quickSort(user.allGames(), "lastPlayedTimestamp");
             Collections.reverse(gamesToDisplay);
         }
-        List<Game> limitedGames = gamesToDisplay.stream().limit(numberOfGames).collect(Collectors.toList());
-        gameListView.setItems(FXCollections.observableArrayList(limitedGames));
-    }
 
-    private void displayError(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
+        List<Game> limitedGames = gamesToDisplay.stream().limit(numberOfGames).collect(Collectors.toList());
+
+        gameListView.setItems(FXCollections.observableArrayList(limitedGames));
     }
 }
