@@ -9,7 +9,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -122,10 +121,8 @@ public class GUIController {
         List<Game> gamesToDisplay;
         if ("Most hours".equals(sortOption)) {
             gamesToDisplay = SortingAlgorithm.quickSort(user.allGames(), "minutes");
-            Collections.reverse(gamesToDisplay);
         } else {
             gamesToDisplay = SortingAlgorithm.quickSort(user.allGames(), "lastPlayedTimestamp");
-            Collections.reverse(gamesToDisplay);
         }
 
         List<Game> limitedGames = gamesToDisplay.stream().limit(numberOfGames).collect(Collectors.toList());

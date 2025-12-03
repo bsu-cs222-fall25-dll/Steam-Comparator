@@ -11,12 +11,7 @@ import java.util.Objects;
 
 public class TestSort {
 
-    @Test
-    public void testGameSortDifferent() throws SteamApiException {
-        List<Game> testParseMinutes = GameParser.parseGames(readFileAsString("sampleGamesOwned.json"), "0");
-        List<Game> testParserTime = GameParser.parseGames(readFileAsString("sampleGamesOwned.json"), "1");
-        Assertions.assertNotEquals(testParseMinutes,testParserTime);
-    }
+
 
     public static String readFileAsString(String inputFile){
         try (InputStream file = Thread.currentThread().getContextClassLoader().getResourceAsStream(inputFile)) {

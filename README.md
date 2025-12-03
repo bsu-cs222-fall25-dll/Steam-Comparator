@@ -13,7 +13,7 @@ Group A: Caleb Langley, Lucas Lehman, Will McRoberts
 ```
 2. Open Intellij
 3. In the top right click `Clone Repository`
-4. Pasete the copied URL
+4. Paste the copied URL
 5. Click the blue `Clone` button in the bottom left
 6. Setup [API key](#api-key)
    

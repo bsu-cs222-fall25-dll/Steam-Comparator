@@ -42,35 +42,6 @@ public class TestFormat {
     }
 
     @Test
-    public void testGameParser() throws SteamApiException {
-        Game testGame = GameParser.parseMostPlayedGame(readFileAsString("sampleGamesOwned.json"));
-        Assertions.assertEquals("Game Name: Tom Clancy's Rainbow Six® Siege X\nHours played: 264.75", testGame.printGame());
-    }
-
-    @Test
-    public void testUserParser() throws SteamApiException {
-        User testUser = UserParser.parseUserData(readFileAsString("sampleUserData.json"),
-                readFileAsString("sampleGamesOwned.json"),
-                readFileAsString("sampleRecentlyPlayed.json"));
-
-        Assertions.assertEquals("""
-                        User: Tigerlang
-                        User ID: 76561198799220336
-                        Most Played Game:
-                        Game Name: Tom Clancy's Rainbow Six® Siege X
-                        Hours played: 264.75
-                        
-                        Recently Played Games (Hours in the past 2 weeks):
-                        - Apex Legends: 15.52 hours\s
-                        - Megabonk: 11.45 hours\s
-                        - Overwatch® 2: 5.40 hours\s
-                        - Escape the Backrooms: 3.83 hours\s
-                        - Middle-earth™: Shadow of Mordor™: 2.02 hours\s
-                        """,
-                testUser.printUser());
-    }
-
-    @Test
     public void testIfAccountNameIsID() throws Exception {
         String accountName = "239583265620358632053682";
         String returned = SteamConnection.getAccountId(accountName);

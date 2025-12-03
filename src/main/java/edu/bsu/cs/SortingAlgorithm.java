@@ -32,10 +32,10 @@ public class SortingAlgorithm {
         int rightPointer = highIndex;
 
         while (leftPointer < rightPointer) {
-            while (extractor.applyAsInt(gameList.get(leftPointer)) <= extractor.applyAsInt(pivot) && leftPointer < rightPointer) {
+            while (extractor.applyAsInt(gameList.get(leftPointer)) >= extractor.applyAsInt(pivot) && leftPointer < rightPointer) {
                 leftPointer++;
             }
-            while (extractor.applyAsInt(gameList.get(rightPointer)) >= extractor.applyAsInt(pivot) && leftPointer < rightPointer) {
+            while (extractor.applyAsInt(gameList.get(rightPointer)) <= extractor.applyAsInt(pivot) && leftPointer < rightPointer) {
                 rightPointer--;
             }
             swap(gameList, leftPointer, rightPointer);
