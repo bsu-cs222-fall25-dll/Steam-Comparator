@@ -2,10 +2,12 @@ package edu.bsu.cs;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 import java.util.Collections;
 import java.util.List;
@@ -40,8 +42,10 @@ public class GUIController {
     private void setupGameListView(ListView<Game> listView) {
         listView.setCellFactory(param -> new ListCell<>() {
             private final ImageView imageView = new ImageView();
-            private final Label label = new Label();
-            private final HBox hbox = new HBox(10, imageView, label);
+            private final Label numberLabel = new Label();
+            private final Label textLabel = new Label();
+            private final VBox textVBox = new VBox(textLabel);
+            private final HBox hbox = new HBox(10, numberLabel, imageView, textVBox);
 
             @Override
             protected void updateItem(Game game, boolean empty) {
@@ -49,6 +53,10 @@ public class GUIController {
                 if (empty || game == null) {
                     setGraphic(null);
                 } else {
+                    numberLabel.setText(String.format("%d.", getIndex() + 1));
+                    numberLabel.setMinWidth(20);
+                    numberLabel.setAlignment(Pos.CENTER_LEFT);
+
                     if (game.imageURL() != null && !game.imageURL().isEmpty()) {
                         String imageUrl = String.format("http://media.steampowered.com/steamcommunity/public/images/apps/%d/%s.jpg",
                                 game.appID(), game.imageURL());
@@ -58,8 +66,9 @@ public class GUIController {
                     } else {
                         imageView.setImage(null);
                     }
+
                     double hours = game.minutes() / 60.0;
-                    label.setText(String.format("%s\n%.1f hours", game.gameName(), hours));
+                    textLabel.setText(String.format("%s\n%.1f hours", game.gameName(), hours));
 
                     setGraphic(hbox);
                 }
@@ -108,7 +117,6 @@ public class GUIController {
             gamesToDisplay = SortingAlgorithm.quickSort(user.allGames(), "lastPlayedTimestamp");
             Collections.reverse(gamesToDisplay);
         }
-
         List<Game> limitedGames = gamesToDisplay.stream().limit(numberOfGames).collect(Collectors.toList());
         gameListView.setItems(FXCollections.observableArrayList(limitedGames));
     }
