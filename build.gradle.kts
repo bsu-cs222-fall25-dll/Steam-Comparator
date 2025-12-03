@@ -18,14 +18,8 @@ java {
     targetCompatibility = JavaVersion.VERSION_21
 }
 
-// The resolutionStrategy is a good safety net, but an explicit dependency is needed for the IDE.
-configurations.all {
-    resolutionStrategy.force("net.minidev:json-smart:2.5.1")
-}
-
 dependencies {
     implementation("com.jayway.jsonpath:json-path:2.9.0")
-    // Re-adding the explicit dependency to fix IDE errors.
     implementation("net.minidev:json-smart:2.5.1")
     implementation("org.slf4j:slf4j-nop:2.0.11")
 
