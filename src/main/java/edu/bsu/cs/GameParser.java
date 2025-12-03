@@ -29,8 +29,22 @@ public class GameParser {
             String name = (String) game.get("name");
             int appID = ((Number) game.get("appid")).intValue();
             int minutes = ((Number) game.get("playtime_forever")).intValue();
-            long lastPlayedTimestamp = ((Number) game.get("rtime_last_played")).longValue();
-            games.add(new Game(minutes, appID, lastPlayedTimestamp, name));
+
+            long lastPlayedTimestamp;
+            if (game.containsKey("rtime_last_played")) {
+                lastPlayedTimestamp = ((Number) game.get("rtime_last_played")).longValue();
+            } else {
+                lastPlayedTimestamp = 0;
+            }
+
+            String imageURL;
+            if (game.containsKey("img_icon_url")) {
+                imageURL = ((String) game.get("img_icon_url"));
+            } else {
+                imageURL = "https://steamcdn-a.akamaihd.net/steam/apps/" + appID + "/header.jpg";
+            }
+
+            games.add(new Game(minutes, appID, lastPlayedTimestamp, name, imageURL));
         }
         return games;
     }
