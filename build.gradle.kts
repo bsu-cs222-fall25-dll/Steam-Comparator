@@ -20,7 +20,7 @@ java {
 
 dependencies {
     implementation("com.jayway.jsonpath:json-path:2.9.0")
-    implementation("net.minidev:json-smart:2.5.1")
+    implementation("net.minidev:json-smart:2.5.2")
     implementation("org.slf4j:slf4j-nop:2.0.11")
 
     testImplementation(platform("org.junit:junit-bom:5.10.1"))
