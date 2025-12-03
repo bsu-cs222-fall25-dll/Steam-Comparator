@@ -49,7 +49,6 @@ public class GUIController {
     private void displayUser(TextField inputField, TextArea outputField, String sortOption, int numberOfGames) throws Exception {
         String steamIdentifier = inputField.getText();
         if (steamIdentifier == null || steamIdentifier.trim().isEmpty()) {
-            // Don't show an error if the field is just empty.
             return;
         }
 
