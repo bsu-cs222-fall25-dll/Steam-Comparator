@@ -8,9 +8,8 @@ public class SortingAlgorithm {
         int lowIndex = 0;
         int highIndex = gameList.size() - 1;
 
-        ToIntFunction<Game> extractor = time.equals("rTime")
-                ? Game::rTime
-                : Game::minutes;
+        ToIntFunction<Game> extractor = time.equals("lastPlayedTimestamp")
+                ? Game::lastPlayedTimestamp : Game::minutes;
 
         quickSortAlgo(gameList, lowIndex, highIndex, extractor);
         return gameList;
@@ -33,10 +32,10 @@ public class SortingAlgorithm {
         int rightPointer = highIndex;
 
         while (leftPointer < rightPointer) {
-            while (extractor.applyAsInt(gameList.get(leftPointer)) >= extractor.applyAsInt(pivot) && leftPointer < rightPointer) {
+            while (extractor.applyAsInt(gameList.get(leftPointer)) <= extractor.applyAsInt(pivot) && leftPointer < rightPointer) {
                 leftPointer++;
             }
-            while (extractor.applyAsInt(gameList.get(rightPointer)) <= extractor.applyAsInt(pivot) && leftPointer < rightPointer) {
+            while (extractor.applyAsInt(gameList.get(rightPointer)) >= extractor.applyAsInt(pivot) && leftPointer < rightPointer) {
                 rightPointer--;
             }
             swap(gameList, leftPointer, rightPointer);

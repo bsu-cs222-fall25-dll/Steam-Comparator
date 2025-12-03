@@ -1,20 +1,32 @@
 package edu.bsu.cs;
 
 import com.jayway.jsonpath.JsonPath;
+import com.jayway.jsonpath.PathNotFoundException;
+import net.minidev.json.JSONArray;
+
 
 import java.util.List;
 
 public class UserParser {
-    public static User parseUserData(String jsonUserData, String jsonOwnedGames, String jsonRecentGames) throws SteamApiException {
+    public static User parseUserData(String jsonUserData, String jsonOwnedGames) throws SteamApiException {
         try {
+            JSONArray players = JsonPath.read(jsonUserData, "$.response.players");
+            if (players.isEmpty()) {
+                throw new SteamApiException("No Steam user found with the given ID. Please check the ID and try again.");
+            }
+
             String steamID = parseSteamID(jsonUserData);
             String displayName = parseDisplayName(jsonUserData);
-            Game userMostPlayedGame = GameParser.parseMostPlayedGame(jsonOwnedGames);
-            List<Game> recentGames = GameParser.parseRecentlyPlayedGames(jsonRecentGames);
-            return new User(steamID, displayName, userMostPlayedGame, recentGames);
+            List<Game> allGames = GameParser.parseAllGames(jsonOwnedGames);
+            return new User(steamID, displayName, allGames);
 
+        } catch (PathNotFoundException e) {
+            throw new SteamApiException("Failed to parse user data: The API response was not in the expected format.", e);
         } catch (Exception e) {
-            throw new SteamApiException("Failed to parse user data.", e);
+            if (e instanceof SteamApiException) {
+                throw e;
+            }
+            throw new SteamApiException("An unexpected error occurred while parsing user data.", e);
         }
     }
 
