@@ -23,7 +23,7 @@ public class GUIController {
 
     @FXML
     public void initialize() {
-        compareOptions.getItems().addAll("Most hours", "Recent hours");
+        compareOptions.getItems().addAll("Most hours", "Recently Played");
         compareOptions.setValue("Most hours");
 
         amountOfGames.getItems().addAll(5, 10, 25, 50);
