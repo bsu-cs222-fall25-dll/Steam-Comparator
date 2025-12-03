@@ -26,16 +26,6 @@ public class UserFetcher {
         }
     }
 
-    public static String getRecentlyPlayedDataAsString(String accountName) throws SteamApiException {
-        try {
-            String accountID = SteamConnection.getAccountId(accountName);
-            URLConnection connection = SteamConnection.connectToRecentlyPlayed(accountID);
-            return readJsonAsString(connection);
-        } catch (Exception e) {
-            throw new SteamApiException("Failed to fetch recently played games data.", e);
-        }
-    }
-
     public static String readJsonAsString(URLConnection connection) throws SteamApiException {
         try (InputStream input = connection.getInputStream()) {
             return new String(input.readAllBytes(), StandardCharsets.UTF_8);

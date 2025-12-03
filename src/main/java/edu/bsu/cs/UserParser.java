@@ -8,7 +8,7 @@ import net.minidev.json.JSONArray;
 import java.util.List;
 
 public class UserParser {
-    public static User parseUserData(String jsonUserData, String jsonOwnedGames, String jsonRecentGames) throws SteamApiException {
+    public static User parseUserData(String jsonUserData, String jsonOwnedGames) throws SteamApiException {
         try {
             // Check if the player array is empty. This happens with invalid SteamIDs.
             JSONArray players = JsonPath.read(jsonUserData, "$.response.players");
@@ -19,8 +19,7 @@ public class UserParser {
             String steamID = parseSteamID(jsonUserData);
             String displayName = parseDisplayName(jsonUserData);
             List<Game> allGames = GameParser.parseAllGames(jsonOwnedGames);
-            List<Game> recentGames = GameParser.parseRecentlyPlayedGames(jsonRecentGames);
-            return new User(steamID, displayName, allGames, recentGames);
+            return new User(steamID, displayName, allGames);
 
         } catch (PathNotFoundException e) {
             // This can happen if the overall JSON structure is wrong

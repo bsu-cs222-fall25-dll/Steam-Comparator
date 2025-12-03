@@ -24,35 +24,6 @@ public class GameParser {
         }
     }
 
-    public static List<Game> parseRecentlyPlayedGames(String jsonRecentlyPlayedData) throws SteamApiException {
-        try {
-            ReadContext context = JsonPath.parse(jsonRecentlyPlayedData);
-            // The 'games' array may not exist if there are no recent games.
-            List<Map<String, Object>> games = context.read("$.response.games[*]");
-
-            if (games == null || games.isEmpty()) {
-                return new ArrayList<>();
-            }
-
-            List<Game> recentGames = new ArrayList<>();
-            for (Map<String, Object> game : games) {
-                String name = (String) game.get("name");
-                int appID = ((Number) game.get("appid")).intValue();
-                // Use "playtime_2weeks" for the minutes value in the context of recent games
-                int minutes = ((Number) game.get("playtime_2weeks")).intValue();
-                // The recent games API doesn't provide rtime_last_played, so we use 0 as a placeholder.
-                // The list is already sorted by recency from the API.
-                recentGames.add(new Game(minutes, appID, 0, name));
-            }
-            return recentGames;
-        } catch (PathNotFoundException e) {
-            // This is expected if the user has no recently played games.
-            return new ArrayList<>();
-        } catch (Exception e) {
-            throw new SteamApiException("Error parsing recent games data.", e);
-        }
-    }
-
     private static List<Game> storeGamesInList(List<Map<String, Object>> allGames) {
         if (allGames == null) {
             return new ArrayList<>();
@@ -62,9 +33,9 @@ public class GameParser {
             String name = (String) game.get("name");
             int appID = ((Number) game.get("appid")).intValue();
             int minutes = ((Number) game.get("playtime_forever")).intValue();
-            // rtime_last_played is not always present, so default to 0
-            int rTime = game.containsKey("rtime_last_played") ? ((Number) game.get("rtime_last_played")).intValue() : 0;
-            games.add(new Game(minutes, appID, rTime, name));
+            // rtime_last_played is a Unix timestamp (long)
+            long lastPlayedTimestamp = game.containsKey("rtime_last_played") ? ((Number) game.get("rtime_last_played")).longValue() : 0;
+            games.add(new Game(minutes, appID, lastPlayedTimestamp, name));
         }
         return games;
     }

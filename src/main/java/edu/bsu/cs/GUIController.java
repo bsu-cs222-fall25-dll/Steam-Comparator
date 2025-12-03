@@ -55,10 +55,9 @@ public class GUIController {
         String accountName = AccountParser.parseAccountName(steamIdentifier);
         String userData = UserFetcher.getUserDataAsString(accountName);
         String gameData = UserFetcher.getOwnedGamesAsString(accountName);
-        String recentData = UserFetcher.getRecentlyPlayedDataAsString(accountName);
-        User user = UserParser.parseUserData(userData, gameData, recentData);
+        User user = UserParser.parseUserData(userData, gameData);
 
-        if (user.allGames().isEmpty() && user.recentGames().isEmpty()) {
+        if (user.allGames().isEmpty()) {
             String privateProfileMessage = "User: " + user.displayName() +
                                            "\nUser ID: " + user.steamID() +
                                            "\n\nThis profile is private or has no game data available.";
@@ -68,12 +67,11 @@ public class GUIController {
 
         List<Game> gamesToDisplay;
         if ("Most hours".equals(sortOption)) {
-            // Sort all games by total playtime (descending)
             gamesToDisplay = SortingAlgorithm.quickSort(user.allGames(), "minutes");
-            Collections.reverse(gamesToDisplay); // Show most played first
-        } else {
-            // The recent games list from the API is already sorted by recency.
-            gamesToDisplay = user.recentGames();
+            Collections.reverse(gamesToDisplay); 
+        } else { // "Recent hours"
+            gamesToDisplay = SortingAlgorithm.quickSort(user.allGames(), "lastPlayedTimestamp");
+            Collections.reverse(gamesToDisplay);
         }
 
         outputField.setText(formatUserOutput(user, gamesToDisplay, numberOfGames, sortOption));
@@ -86,21 +84,21 @@ public class GUIController {
                 .append("\n\n");
 
         if (games.isEmpty()) {
-            if ("Recent hours".equals(sortOption)) {
-                sb.append("No recently played games in the last two weeks.");
-            } else {
-                sb.append("No games with playtime found for this user.");
-            }
+            sb.append("No game data found for this user.");
             return sb.toString();
         }
 
-        String title = "Recent hours".equals(sortOption) ? "Recently Played Games:" : "Most Played Games:";
+        String title;
+        if ("Recent hours".equals(sortOption)) {
+            title = "Recently Played Games:";
+        } else {
+            title = "Most Played Games:";
+        }
         sb.append(title).append("\n");
 
         int gamesToShow = Math.min(numberOfGames, games.size());
         for (int i = 0; i < gamesToShow; i++) {
             Game g = games.get(i);
-            // The 'minutes' field for recent games is playtime in the last 2 weeks.
             double hours = g.minutes() / 60.0;
             sb.append(String.format("- %s: %.1f hours\n", g.gameName(), hours));
         }
