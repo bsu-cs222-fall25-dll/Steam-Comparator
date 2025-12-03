@@ -29,7 +29,7 @@ public class GameParser {
             String name = (String) game.get("name");
             int appID = ((Number) game.get("appid")).intValue();
             int minutes = ((Number) game.get("playtime_forever")).intValue();
-            long lastPlayedTimestamp = game.containsKey("rtime_last_played") ? ((Number) game.get("rtime_last_played")).longValue() : 0;
+            long lastPlayedTimestamp = ((Number) game.get("rtime_last_played")).longValue();
             games.add(new Game(minutes, appID, lastPlayedTimestamp, name));
         }
         return games;
