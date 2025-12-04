@@ -18,5 +18,17 @@ public class TestParse {
         Assertions.assertEquals("Portal", user.allGames().getFirst().gameName());
     }
 
+    @Test
+    public void testUrlParse() throws SteamApiException {
+        String vanityID = AccountParser.parseAccountName("https://steamcommunity.com/id/tigerlang/");
+
+        Assertions.assertEquals("tigerlang", vanityID);
+    }
+    @Test
+    public void testParseAccountIdInvalidJson() {
+        String invalidJson = "{\"notsteamid\":\"123\"}";
+        Assertions.assertNull(AccountParser.parseAccountId(invalidJson));
+    }
+
 
 }

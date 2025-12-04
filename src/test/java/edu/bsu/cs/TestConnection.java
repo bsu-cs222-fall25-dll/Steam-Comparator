@@ -27,11 +27,5 @@ public class TestConnection {
         String userConnection = readJsonAsString(SteamConnection.connectToUser("76561198799220336"));
         Assertions.assertNotNull(userConnection);
     }
-    @Test
-    public void testParseAccountIdInvalidJson() {
-        String invalidJson = "{\"notsteamid\":\"123\"}";
-        Assertions.assertNull(AccountParser.parseAccountId(invalidJson));
-    }
-
 
 }

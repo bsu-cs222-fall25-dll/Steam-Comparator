@@ -20,12 +20,6 @@ public class TestFormat {
         Assertions.assertNotNull(jsonData);
     }
 
-    @Test
-    public void testUrlParse() throws SteamApiException {
-        String vanityID = AccountParser.parseAccountName("https://steamcommunity.com/id/tigerlang/");
-
-        Assertions.assertEquals("tigerlang", vanityID);
-    }
 
     @Test
     public void testSteamIDFetched() {
@@ -46,6 +40,18 @@ public class TestFormat {
         String accountName = "239583265620358632053682";
         String returned = SteamConnection.getAccountId(accountName);
         Assertions.assertEquals("239583265620358632053682", returned);
+    }
+
+    @Test
+    public void testUserDataString() throws SteamApiException {
+        String userdata = UserFetcher.getUserDataAsString("tigerlang");
+        Assertions.assertNotNull(userdata);
+    }
+
+    @Test
+    public void testGameDataString() throws SteamApiException {
+        String gameData = UserFetcher.getOwnedGamesAsString("tigerlang");
+        Assertions.assertNotNull(gameData);
     }
 
     public static String readFileAsString(String inputFile){
