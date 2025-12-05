@@ -1,6 +1,7 @@
 package edu.bsu.cs;
 
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.Image;
@@ -32,9 +33,18 @@ public class GameListCell extends ListCell<Game> {
             numberLabel.setText(String.format("%d.", getIndex() + 1));
 
             if (game.imageURL() != null && !game.imageURL().isEmpty()) {
-                String imageUrl = String.format("http://media.steampowered.com/steamcommunity/public/images/apps/%d/%s.jpg",
-                        game.appID(), game.imageURL());
-                imageView.setImage(new Image(imageUrl, true));
+                try {
+                    String imageUrl = String.format("http://media.steampowered.com/steamcommunity/public/images/apps/%d/%s.jpg",
+                            game.appID(), game.imageURL());
+                    imageView.setImage(new Image(imageUrl, true));
+                } catch (Exception e) {
+                    imageView.setImage(null);
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Image Load Error");
+                    alert.setHeaderText("Failed to load game image.");
+                    alert.setContentText(e.getMessage());
+                    alert.showAndWait();
+                }
             } else {
                 imageView.setImage(null);
             }
