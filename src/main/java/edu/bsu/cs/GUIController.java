@@ -59,7 +59,7 @@ public class GUIController {
 
             List<Game> games = gameListBuilder.getSortedGames(userData, gameData, sortOption, numberOfGames);
 
-            if (games.isEmpty() && !steamIdentifier.trim().isEmpty()) {
+            if (games.isEmpty()) {
                 gameListView.setPlaceholder(new Label("Profile is private or has no game data."));
             } else {
                 gameListView.setItems(FXCollections.observableArrayList(games));
