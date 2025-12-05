@@ -28,16 +28,24 @@ public class GameParser {
         for (Map<String, Object> game : allGames) {
             String name = (String) game.get("name");
             int appID = ((Number) game.get("appid")).intValue();
-            int minutes = ((Number) game.get("playtime_forever")).intValue();
+            int minutes = 0;
+            if (game.containsKey("playtime_forever")) {
+                minutes = ((Number) game.get("playtime_forever")).intValue();
+            }
             int lastPlayedTimestamp;
             if (game.containsKey("rtime_last_played")) {
                 lastPlayedTimestamp = ((Number) game.get("rtime_last_played")).intValue();
             } else {
                 lastPlayedTimestamp = 0;
             }
-            // Use a safe default for the image URL
-            String imageURL = game.containsKey("img_icon_url") ? (String) game.get("img_icon_url") : "";
             
+            String imageURL;
+            if (game.containsKey("img_icon_url")) {
+                imageURL = (String) game.get("img_icon_url");
+            } else {
+                imageURL = "";
+            }
+
             games.add(new Game(minutes, appID, lastPlayedTimestamp, name, imageURL));
         }
         return games;

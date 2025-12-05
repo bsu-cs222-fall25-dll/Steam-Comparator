@@ -25,7 +25,6 @@ public class AccountParser
             if (name.isEmpty()) {
                 throw new SteamApiException("Invalid link\n");
             }
-
             return name;
         } catch (URISyntaxException e) {
             throw new SteamApiException("Invalid URL format. \n", e);

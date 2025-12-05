@@ -21,7 +21,7 @@ public class GUIController {
     @FXML
     private ComboBox<Integer> amountOfGames;
 
-    private final GameListBuilder profileService = new GameListBuilder();
+    private final GameListBuilder gameListBuilder = new GameListBuilder();
 
     @FXML
     public void initialize() {
@@ -49,9 +49,17 @@ public class GUIController {
     private void displayUser(TextField inputField, ListView<Game> gameListView, String sortOption, int numberOfGames) {
         try {
             String steamIdentifier = inputField.getText();
-            List<Game> games = profileService.getSortedGamesForUser(steamIdentifier, sortOption, numberOfGames);
+            if (steamIdentifier == null || steamIdentifier.trim().isEmpty()) {
+                return;
+            }
 
-            if (games.isEmpty() && steamIdentifier != null && !steamIdentifier.trim().isEmpty()) {
+            String accountName = AccountParser.parseAccountName(steamIdentifier);
+            String userData = UserFetcher.getUserDataAsString(accountName);
+            String gameData = UserFetcher.getOwnedGamesAsString(accountName);
+
+            List<Game> games = gameListBuilder.getSortedGames(userData, gameData, sortOption, numberOfGames);
+
+            if (games.isEmpty() && !steamIdentifier.trim().isEmpty()) {
                 gameListView.setPlaceholder(new Label("Profile is private or has no game data."));
             } else {
                 gameListView.setItems(FXCollections.observableArrayList(games));
